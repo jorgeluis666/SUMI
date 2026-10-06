@@ -1,8 +1,10 @@
 # SUMI | Dashboard Lima Retail 2026
 
 Dashboard de gasto publicitario en Google Ads de SUMI (Suministros & Proveedores Industriales S.A.C.,
-sumiperu.com). La agencia gestiona campanas de la red de busqueda para generar leads; hoy hay una sola,
-`CE | Search | Canastas Navideñas | Lima`, activa desde el 7 de setiembre de 2026.
+sumiperu.com). La agencia gestiona campanas de la red de busqueda para generar leads. El tablero muestra la
+cuenta de Google Ads de **Landing Page 001** (EPP y seguridad industrial, S/ 25 diarios). La campana de
+temporada `CE | Search | Canastas Navideñas | Lima` (desde el 7 de setiembre de 2026) esta en otra cuenta y no
+entra en el tablero: los informes de Drive tienen que salir de la cuenta de Landing Page 001.
 
 Es una copia adaptada del tablero de Aquarius (`jorgeluis666/objetivos-Aquarius`), con los mismos modulos.
 
@@ -130,19 +132,21 @@ carpeta de Drive **Google Ads SUMI Keywords**, una hoja de calculo por mes (`SUM
 - Una palabra clave se identifica por texto y concordancia dentro de su campana; si esta en varios grupos de
   anuncios se suma en una fila. CTR, CPC y costo por conversion se calculan sobre las sumas, como Google Ads.
 - La campana se marca "Campaña detenida" cuando todas sus palabras clave traen ese motivo de estado.
-- **Informe sin columna Campaña.** El informe de SUMI se exporta desde dentro de la campana, asi que no trae
-  la columna Campaña (sus totales dicen "Palabras clave de tu campaña"). En ese caso las palabras clave se
-  asignan a la campana del informe de Gasto Publicitario del mismo mes, si es una sola; si no, quedan como
-  "Campaña del informe". Si se exporta desde el nivel de cuenta, con la columna, se usa la columna.
+- **Informe sin columna Campaña.** Un informe exportado desde dentro de una campana no trae la columna Campaña
+  (sus totales dicen "Palabras clave de tu campaña"). En ese caso las palabras clave se asignan a la campana del
+  informe de Gasto Publicitario del mismo mes, si es una sola; si no, quedan como "Campaña del informe". Lo
+  mejor es exportar desde el nivel de cuenta, que trae la columna (asi estan los informes de Landing Page 001).
 - Los informes de setiembre y octubre de 2026 no traen las columnas de cuota de impresiones, asi que
   "Perdidas x ranking" sale vacia.
+- **Revisar el archivo antes de subirlo**: la primera linea debe decir "Informe de palabras clave de busqueda".
+  Un "Informe de campaña" en esta carpeta se descarta.
 
 ### Datos y sincronizacion
 
 - `scripts/sync-keywords.py` exporta cada hoja como CSV (`docs.google.com/spreadsheets/d/<id>/export?format=csv`,
   sin credenciales mientras la carpeta siga compartida por enlace) y escribe
   `data/sumi-palabras-clave-2026.json`, `data/keywords-manifest.json` y una copia de cada informe en
-  `data/csv-backups/keywords/`. El mes sale de la linea de rango del informe ("7 de septiembre de 2026 - ...")
+  `data/csv-backups/keywords/`. El mes sale de la linea de rango del informe ("1 de septiembre de 2026 - ...")
   y, si no esta, del nombre del archivo. Reusa los helpers de `scripts/sync-drive.py`.
 - **Todos los dias**: es un paso mas de `.github/workflows/sync-drive.yml` (06:20 en Lima). Si cambio algo,
   hace commit y publica el tablero. Cada carpeta se sincroniza aunque la otra falle. Si la carpeta no trae
@@ -244,17 +248,17 @@ La fuente normalizada que consume el tablero es `data/sumi-lima-retail-2026.json
 ```json
 {
   "defaultMonth": "2026-10",
-  "drive": { "lastSync": "2026-10-06T04:48:03Z", "discovery": "publica", "files": [] },
+  "drive": { "lastSync": "2026-10-06T06:17:40Z", "discovery": "publica", "files": [] },
   "months": [
     {
       "id": "2026-09",
       "label": "Setiembre 2026",
       "sourceFile": "SUMI setiembre 2026",
-      "driveFileId": "1dOk8YwaWWO1MQupdebNM3JJhp8VReXw0Iae2rfGdwiI",
+      "driveFileId": "1yT4b6KNxgU7pGMgOTexnz5wbvpId5-9j5oRRJIeLgQk",
       "records": [ /* una fila por campana, con estado, presupuesto diario y % de variacion */ ],
-      "totals": { "cost": 461.27, "impressions": 3593, "clicks": 487, "conversions": 135.03 },
-      "period": { "start": "2026-09-07", "end": "2026-09-30" },
-      "dailyBudget": 20
+      "totals": { "cost": 725.33, "impressions": 11636, "clicks": 857, "conversions": 443.5 },
+      "period": { "start": "2026-09-01", "end": "2026-09-30" },
+      "dailyBudget": 25
     }
   ]
 }
