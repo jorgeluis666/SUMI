@@ -157,9 +157,8 @@ carpeta de Drive **Google Ads SUMI Keywords**, una hoja de calculo por mes (`SUM
 - **Campanas excluidas**: `keywords.excludeCampaigns` en `data/drive-config.json` lista campanas que no se
   muestran ni se guardan aunque vengan en el informe (hoy ninguna). Se filtran en la sincronizacion diaria, en
   el boton Actualizar y al mostrar. La copia cruda del informe en `data/csv-backups/keywords/` las conserva.
-- La carga inicial (setiembre y octubre de 2026) se importo con `--file`, porque las hojas estaban en la carpeta
-  "Términos de Búsqueda SUMI", que no esta compartida por enlace. Cuando esten en **Google Ads SUMI Keywords**
-  la sincronizacion diaria las toma y reemplaza esos meses.
+- Las hojas tienen que estar en **Google Ads SUMI Keywords**, que es la carpeta compartida por enlace. Una hoja en
+  otra carpeta sin compartir (por ejemplo "Términos de Búsqueda SUMI") responde 401 y no se puede leer.
 
 ```bash
 python scripts/sync-keywords.py          # sincroniza
