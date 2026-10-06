@@ -11,15 +11,15 @@
       "label": "Setiembre 2026",
       "records": [
         {
-          "campaign": "CE | Search | Canastas Navideñas | Lima",
-          "cost": 461.27,
-          "impressions": 3593,
-          "ctr": 0.1355,
-          "clicks": 487,
-          "costPerConversion": 3.42,
-          "conversions": 135.03,
+          "campaign": "Landing Page 001",
+          "cost": 725.33,
+          "impressions": 11636,
+          "ctr": 0.0737,
+          "clicks": 857,
+          "costPerConversion": 1.64,
+          "conversions": 443.5,
           "status": "Habilitada",
-          "dailyBudget": 20,
+          "dailyBudget": 25,
           "costDelta": null,
           "ctrDelta": null,
           "clicksDelta": null,
@@ -29,20 +29,20 @@
         }
       ],
       "sourceFile": "SUMI setiembre 2026",
-      "driveFileId": "1dOk8YwaWWO1MQupdebNM3JJhp8VReXw0Iae2rfGdwiI",
+      "driveFileId": "1yT4b6KNxgU7pGMgOTexnz5wbvpId5-9j5oRRJIeLgQk",
       "totals": {
-        "cost": 461.27,
-        "impressions": 3593,
-        "clicks": 487,
-        "ctr": 0.1355,
-        "conversions": 135.03,
-        "costPerConversion": 3.42
+        "cost": 725.33,
+        "impressions": 11636,
+        "clicks": 857,
+        "ctr": 0.0737,
+        "conversions": 443.5,
+        "costPerConversion": 1.64
       },
       "period": {
-        "start": "2026-09-07",
+        "start": "2026-09-01",
         "end": "2026-09-30"
       },
-      "dailyBudget": 20
+      "dailyBudget": 25
     },
     {
       "id": "2026-10",
@@ -58,12 +58,12 @@
           "conversions": 43.72,
           "status": "Habilitada",
           "dailyBudget": 20,
-          "costDelta": -0.8211893251241138,
-          "ctrDelta": 0.4169741697416973,
-          "clicksDelta": -0.784394250513347,
-          "conversionsDelta": -0.6762200992372065,
-          "costPerConversionDelta": -0.44736842105263164,
-          "impressionsDelta": -0.847759532424158
+          "costDelta": null,
+          "ctrDelta": null,
+          "clicksDelta": null,
+          "conversionsDelta": null,
+          "costPerConversionDelta": null,
+          "impressionsDelta": null
         }
       ],
       "sourceFile": "SUMI octubre 2026",
@@ -97,18 +97,18 @@
       "conversions": 43.72,
       "status": "Habilitada",
       "dailyBudget": 20,
-      "costDelta": -0.8211893251241138,
-      "ctrDelta": 0.4169741697416973,
-      "clicksDelta": -0.784394250513347,
-      "conversionsDelta": -0.6762200992372065,
-      "costPerConversionDelta": -0.44736842105263164,
-      "impressionsDelta": -0.847759532424158
+      "costDelta": null,
+      "ctrDelta": null,
+      "clicksDelta": null,
+      "conversionsDelta": null,
+      "costPerConversionDelta": null,
+      "impressionsDelta": null
     }
   ],
   "drive": {
     "folderId": "1Bmrx9yRMJCu8l4SCqvBOf0GdPWEMvvL6",
     "discovery": "publica",
-    "lastSync": "2026-10-06T05:33:34Z",
+    "lastSync": "2026-10-06T05:57:38Z",
     "files": [
       {
         "id": "1SxiChkLu_dLpgruffsbzeoCqNiszeK3283fxA40mO40",
@@ -116,7 +116,7 @@
         "modifiedTime": null
       },
       {
-        "id": "1dOk8YwaWWO1MQupdebNM3JJhp8VReXw0Iae2rfGdwiI",
+        "id": "1yT4b6KNxgU7pGMgOTexnz5wbvpId5-9j5oRRJIeLgQk",
         "name": "SUMI setiembre 2026",
         "modifiedTime": null
       }
