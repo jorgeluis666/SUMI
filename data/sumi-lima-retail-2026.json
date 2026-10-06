@@ -49,38 +49,38 @@
       "label": "Octubre 2026",
       "records": [
         {
-          "campaign": "CE | Search | Canastas Navideñas | Lima",
-          "cost": 82.48,
-          "impressions": 547,
-          "ctr": 0.192,
+          "campaign": "Landing Page 001",
+          "cost": 108.35,
+          "impressions": 1460,
+          "ctr": 0.0719,
           "clicks": 105,
-          "costPerConversion": 1.89,
-          "conversions": 43.72,
+          "costPerConversion": 1.92,
+          "conversions": 56.5,
           "status": "Habilitada",
-          "dailyBudget": 20,
-          "costDelta": null,
-          "ctrDelta": null,
-          "clicksDelta": null,
-          "conversionsDelta": null,
-          "costPerConversionDelta": null,
-          "impressionsDelta": null
+          "dailyBudget": 25,
+          "costDelta": -0.8506197179214978,
+          "ctrDelta": -0.024423337856173677,
+          "clicksDelta": -0.8774795799299884,
+          "conversionsDelta": -0.8726042841037204,
+          "costPerConversionDelta": 0.1707317073170731,
+          "impressionsDelta": -0.8745273289790306
         }
       ],
       "sourceFile": "SUMI octubre 2026",
-      "driveFileId": "1SxiChkLu_dLpgruffsbzeoCqNiszeK3283fxA40mO40",
+      "driveFileId": "1ONpAvTXTGvwq5mYQHUW-DthAJQRpToRVIZKnK-MFn6E",
       "totals": {
-        "cost": 82.48,
-        "impressions": 547,
+        "cost": 108.35,
+        "impressions": 1460,
         "clicks": 105,
-        "ctr": 0.192,
-        "conversions": 43.72,
-        "costPerConversion": 1.89
+        "ctr": 0.0719,
+        "conversions": 56.5,
+        "costPerConversion": 1.92
       },
       "period": {
         "start": "2026-10-01",
         "end": "2026-10-04"
       },
-      "dailyBudget": 20
+      "dailyBudget": 25
     }
   ],
   "month": "2026-10",
@@ -88,30 +88,30 @@
   "receivedHeaders": [],
   "records": [
     {
-      "campaign": "CE | Search | Canastas Navideñas | Lima",
-      "cost": 82.48,
-      "impressions": 547,
-      "ctr": 0.192,
+      "campaign": "Landing Page 001",
+      "cost": 108.35,
+      "impressions": 1460,
+      "ctr": 0.0719,
       "clicks": 105,
-      "costPerConversion": 1.89,
-      "conversions": 43.72,
+      "costPerConversion": 1.92,
+      "conversions": 56.5,
       "status": "Habilitada",
-      "dailyBudget": 20,
-      "costDelta": null,
-      "ctrDelta": null,
-      "clicksDelta": null,
-      "conversionsDelta": null,
-      "costPerConversionDelta": null,
-      "impressionsDelta": null
+      "dailyBudget": 25,
+      "costDelta": -0.8506197179214978,
+      "ctrDelta": -0.024423337856173677,
+      "clicksDelta": -0.8774795799299884,
+      "conversionsDelta": -0.8726042841037204,
+      "costPerConversionDelta": 0.1707317073170731,
+      "impressionsDelta": -0.8745273289790306
     }
   ],
   "drive": {
     "folderId": "1Bmrx9yRMJCu8l4SCqvBOf0GdPWEMvvL6",
     "discovery": "publica",
-    "lastSync": "2026-10-06T05:57:38Z",
+    "lastSync": "2026-10-06T06:17:33Z",
     "files": [
       {
-        "id": "1SxiChkLu_dLpgruffsbzeoCqNiszeK3283fxA40mO40",
+        "id": "1ONpAvTXTGvwq5mYQHUW-DthAJQRpToRVIZKnK-MFn6E",
         "name": "SUMI octubre 2026",
         "modifiedTime": null
       },
