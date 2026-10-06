@@ -270,7 +270,7 @@ def import_file(path, check):
         print("[sync-keywords] hay cambios." if changed else "[sync-keywords] sin cambios.")
         return 0
     BACKUPS.mkdir(parents=True, exist_ok=True)
-    (BACKUPS / backup_name(path.name)).write_text(text, encoding="utf-8")
+    (BACKUPS / backup_name(path.name)).write_text(text, encoding="utf-8", newline="")
     DATA.write_text(json.dumps(document, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"[sync-keywords] {drive.month_label(month_id)}: {len(keywords)} palabras clave desde {path.name}")
     return 0
@@ -315,7 +315,7 @@ def main():
             continue
         keywords = drop_excluded(keywords, item["name"])
         store_report(months, month_id, keywords, period, item["name"], item["id"])
-        (BACKUPS / backup_name(item["name"])).write_text(text, encoding="utf-8")
+        (BACKUPS / backup_name(item["name"])).write_text(text, encoding="utf-8", newline="")
         loaded.append(item)
         print(f"[sync-keywords] {drive.month_label(month_id)}: {len(keywords)} palabras clave")
 

@@ -430,7 +430,7 @@ def import_file(path, check):
     if check:
         print("[sync-drive] hay cambios." if changed else "[sync-drive] sin cambios.")
         return 0
-    (BACKUPS.parent / path.name).write_text(text, encoding="utf-8")
+    (BACKUPS.parent / path.name).write_text(text, encoding="utf-8", newline="")
     DATA.write_text(json.dumps(document, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"[sync-drive] {month_label(month_id)}: {len(records)} campanas desde {path.name}")
     return 0
@@ -471,7 +471,7 @@ def main():
             print(f"[sync-drive] omito {item['name']}: no parece un informe de campana.")
             continue
         store_report(months, month_id, records, totals, summary, item["name"], item["id"])
-        (BACKUPS / backup_name(item["name"])).write_text(text, encoding="utf-8")
+        (BACKUPS / backup_name(item["name"])).write_text(text, encoding="utf-8", newline="")
         print(f"[sync-drive] {month_label(month_id)}: {len(records)} campanas")
 
     finish_document(document, months)

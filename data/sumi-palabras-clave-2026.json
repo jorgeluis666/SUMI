@@ -8,7 +8,7 @@
     {
       "id": "2026-09",
       "label": "Setiembre 2026",
-      "sourceFile": "SUMI KW setiembre 2026.csv",
+      "sourceFile": "SUMI KW setiembre 2026",
       "period": {
         "start": "2026-09-07",
         "end": "2026-09-30"
@@ -382,12 +382,13 @@
           "cost": 0,
           "campaign": "CE | Search | Canastas Navideñas | Lima"
         }
-      ]
+      ],
+      "driveFileId": "1_rn01bkvn8ppoI0mSrOzxuGBsuG5w2iaSR3xZu_2tSw"
     },
     {
       "id": "2026-10",
       "label": "Octubre 2026",
-      "sourceFile": "SUMI KW octubre 2026.csv",
+      "sourceFile": "SUMI KW octubre 2026",
       "period": {
         "start": "2026-10-01",
         "end": "2026-10-04"
@@ -761,7 +762,25 @@
           "cost": 0,
           "campaign": "CE | Search | Canastas Navideñas | Lima"
         }
-      ]
+      ],
+      "driveFileId": "1N4LbL5eFqfg5-yJ_fvgTSleA3qZARpLK3VHMiWkZ0Kw"
     }
-  ]
+  ],
+  "drive": {
+    "folderId": "1VdlVGjWTRItfPHM2TI1mr0RYja5fDPEX",
+    "discovery": "publica",
+    "lastSync": "2026-10-06T05:33:30Z",
+    "files": [
+      {
+        "id": "1N4LbL5eFqfg5-yJ_fvgTSleA3qZARpLK3VHMiWkZ0Kw",
+        "name": "SUMI KW octubre 2026",
+        "modifiedTime": null
+      },
+      {
+        "id": "1_rn01bkvn8ppoI0mSrOzxuGBsuG5w2iaSR3xZu_2tSw",
+        "name": "SUMI KW setiembre 2026",
+        "modifiedTime": null
+      }
+    ]
+  }
 }
