@@ -33,6 +33,7 @@
     'clics': ['clicks', 'int'],
     'prom. cpc': ['cpc', 'number'],
     'ctr': ['ctr', 'percent'],
+    'tipo de campana': ['type', 'text'],
     'conversiones': ['conversions', 'number'],
     'conv.': ['conversions', 'number'],
     'costo/conv.': ['costPerConversion', 'number'],
