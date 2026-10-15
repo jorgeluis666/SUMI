@@ -8,7 +8,7 @@ entra en el tablero: los informes de Drive tienen que salir de la cuenta de Land
 
 Es una copia adaptada del tablero de Aquarius (`jorgeluis666/objetivos-Aquarius`), con los mismos modulos.
 
-Version actual: `v1.1.1`.
+Version actual: `v1.1.2`.
 
 ## Acceso
 
@@ -27,7 +27,7 @@ lateral.
 
 - Titulo: `Gasto Publicitario`
 - Subtitulo: `Leads en Google Ads`
-- La sincronizacion (boton Sincronizar, ultima y proxima, carpetas de Drive) esta en la pildora de la barra
+- La sincronizacion (boton Sincronizar, ultimo y proximo barrido, carpetas de Drive) esta en la pildora de la barra
   superior derecha (ver Sincronizacion > Manual, desde el tablero).
 - Logica en `js/objectives.js`. Sale del informe de campana de Google Ads (un total por mes,
   `data/sumi-lima-retail-2026.json`) y del informe de palabras clave (`data/sumi-palabras-clave-2026.json`, tal
@@ -194,7 +194,7 @@ carpeta de Drive **Google Ads SUMI Keywords**, una hoja de calculo por mes (`SUM
   `data/sumi-palabras-clave-2026.json`, `data/keywords-manifest.json` y una copia de cada informe en
   `data/csv-backups/keywords/`. El mes sale de la linea de rango del informe ("1 de septiembre de 2026 - ...")
   y, si no esta, del nombre del archivo. Reusa los helpers de `scripts/sync-drive.py`.
-- **Todos los dias**: es un paso mas de `.github/workflows/sync-drive.yml` (06:20 en Lima). Si cambio algo,
+- **Todos los dias**: es un paso mas de `.github/workflows/sync-drive.yml` (10:00 en Lima). Si cambio algo,
   hace commit y publica el tablero. Cada carpeta se sincroniza aunque la otra falle. Si la carpeta no trae
   ningun informe el paso falla (y el workflow queda en rojo), pero los meses ya cargados se conservan.
 - **Boton Actualizar** (en el filtro): el navegador vuelve a leer las hojas de Drive y repinta el modulo sin
@@ -321,10 +321,33 @@ habilitadas (ver Proyecciones); cada campana trae ademas su `status` y su `daily
 
 ### Automatica, todos los dias
 
-`.github/workflows/sync-drive.yml` corre a las 11:20 UTC (06:20 en Lima), baja
-las dos carpetas, actualiza `data/` y, solo si algo cambio, hace commit y pide la
+`.github/workflows/sync-drive.yml` corre todos los dias a las **10:00 de Lima**,
+baja las dos carpetas, actualiza `data/` y, solo si algo cambio, hace commit y pide la
 publicacion del tablero. Tambien se puede lanzar a mano desde
 **Actions > Sincronizar Drive > Run workflow**.
+
+GitHub atrasa varias horas los workflows programados (en octubre de 2026 el de las
+06:20 corria entre las 10:50 y las 15:20), asi que la hora la fija un activador de
+**Google Apps Script** que lanza el workflow al momento
+(`scripts/apps-script/sincronizar-sumi.gs`; Apps Script lo corre dentro de unos
+15 minutos de las 10:00). El cron de las 15:00 UTC (10:00 en Lima) queda de
+respaldo: si el activador falla, el barrido igual corre, mas tarde. Instalacion,
+una sola vez:
+
+1. En GitHub > Settings > Developer settings > Personal access tokens > Fine-grained
+   tokens, crear un token solo para el repositorio `SUMI` con el permiso
+   **Actions: Read and write**. Anotar su vencimiento para renovarlo.
+2. En <https://script.google.com>, proyecto nuevo: pegar
+   `scripts/apps-script/sincronizar-sumi.gs` y poner la zona horaria del proyecto
+   en (GMT-05:00) Lima.
+3. Configuracion del proyecto > Propiedades del script: `GITHUB_TOKEN` = el token. El
+   token no va en el codigo ni en el repo.
+4. Ejecutar `instalarActivador` una vez (aceptar los permisos) y luego
+   `sincronizarSumi` para probar: en GitHub > Actions aparece la ejecucion.
+
+La pildora de la barra superior muestra el ultimo barrido real (lo lee de la API
+publica de GitHub, sin credenciales) y se pone ambar si fallo o si pasaron mas de
+30 horas sin uno.
 
 Para correrla en local:
 
@@ -341,9 +364,9 @@ se exportan como CSV (`docs.google.com/spreadsheets/d/<id>/export?format=csv`).
 ### Manual, desde el tablero
 
 La sincronizacion vive en la barra superior derecha. La pildora dice hasta que dia
-llegan los datos y cuando se sincronizaron; al pulsarla abre el detalle: datos, de
-donde salen (Origen), meses cargados, ultima y proxima sincronizacion, las dos
-carpetas de Drive (con enlace) y lo que falta subir. A su lado va el boton
+llegan los datos y la hora del ultimo barrido; al pulsarla abre el detalle: datos, de
+donde salen (Origen), meses cargados, ultimo y proximo barrido, cuando cambiaron los
+datos, las dos carpetas de Drive (con enlace) y lo que falta subir. A su lado va el boton
 **Sincronizar** (en Gasto Publicitario y Proyecciones; Palabras Clave tiene su propio
 boton Actualizar). Si la sincronizacion falla, la pildora se pone ambar y el detalle
 dice por que. Su comportamiento depende de `data/drive-config.json`:

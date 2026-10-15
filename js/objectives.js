@@ -153,7 +153,9 @@
           period: month.period || null,
           dailyBudget: isNum(month.dailyBudget) ? Number(month.dailyBudget) : null,
           // Informe por dia y campana (opcional, ver detailRows): hoy no llega.
-          detail: month.detail || null
+          detail: month.detail || null,
+          // Campanas de excludeCampaigns que traia el informe: el tablero las avisa.
+          excluded: Array.isArray(month.excluded) ? month.excluded : []
         }))
         .sort((a, b) => a.id.localeCompare(b.id));
     }
@@ -168,7 +170,8 @@
         daily: [],
         period: null,
         dailyBudget: null,
-        detail: null
+        detail: null,
+        excluded: []
       }];
     }
     return [];
@@ -245,15 +248,56 @@
 
   // ── Sincronizacion: pildora de la barra superior con su detalle y el boton Sincronizar ──
   // drive-sync.js maneja el boton (#sync-now) y escribe su avance en #sync-status, dentro del detalle.
-  // La sincronizacion diaria (.github/workflows/sync-drive.yml) corre a las 11:20 UTC, 06:20 en Lima.
-  const DAILY_SYNC_UTC = { hour: 11, minute: 20 };
+  // El barrido diario corre en GitHub Actions (.github/workflows/sync-drive.yml): lo lanza a las 10:00 de Lima
+  // (15:00 UTC) un activador de Google Apps Script (scripts/apps-script/sincronizar-sumi.gs). El tablero lee
+  // su ultima ejecucion de la API publica de GitHub: sin credenciales, 60 consultas por hora y por IP.
+  const DAILY_SYNC_UTC = { hour: 15, minute: 0 };
+  const SYNC_RUNS_URL = 'https://api.github.com/repos/jorgeluis666/SUMI/actions/workflows/sync-drive.yml/runs?per_page=1';
+  // Sin barrido en mas de un dia y algo, la pildora pasa a ambar.
+  const STALE_SWEEP_HOURS = 30;
+  const sweep = { run: null, status: 'idle', checkedAt: 0 };
   const safeUrl = url => (/^https:\/\//i.test(String(url || '')) ? String(url) : null);
 
   function nextSyncLabel() {
     const now = new Date();
     const next = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), DAILY_SYNC_UTC.hour, DAILY_SYNC_UTC.minute));
     if (next <= now) next.setUTCDate(next.getUTCDate() + 1);
-    return `${stampLabel(next, false)} aprox. · todos los días`;
+    return `${stampLabel(next, false)} · todos los días`;
+  }
+
+  // Ultima ejecucion del barrido. Se consulta al cargar y al abrir el detalle (como mucho cada 10 minutos).
+  async function loadLastSweep(force = false) {
+    if (sweep.status === 'loading' || (!force && Date.now() - sweep.checkedAt < 10 * 60000)) return;
+    sweep.status = 'loading';
+    try {
+      const response = await fetch(SYNC_RUNS_URL, { cache: 'no-store' });
+      if (!response.ok) throw new Error(`GitHub respondio ${response.status}`);
+      const payload = await response.json();
+      sweep.run = (payload.workflow_runs || [])[0] || null;
+      sweep.status = 'ok';
+    } catch (error) {
+      sweep.status = 'error';
+      console.warn('[gasto] no se pudo leer el ultimo barrido', error);
+    }
+    sweep.checkedAt = Date.now();
+    renderStatusCard();
+    updateSourceLabels();
+  }
+
+  function sweepInfo() {
+    const run = sweep.run;
+    if (!run) return null;
+    const at = run.run_started_at || run.created_at;
+    const done = run.status === 'completed';
+    const hours = (Date.now() - new Date(at).getTime()) / 3600000;
+    return {
+      at,
+      running: !done,
+      ok: done && run.conclusion === 'success',
+      failed: done && run.conclusion !== 'success',
+      stale: hours > STALE_SWEEP_HOURS,
+      url: safeUrl(run.html_url)
+    };
   }
 
   function folderHtml(label, url) {
@@ -263,12 +307,15 @@
 
   const latestGastoMonth = () => gastoMonthByKey(gasto.latestKey);
 
-  // Texto de la pildora en Gasto Publicitario: hasta que dia llegan los datos y cuando se sincronizaron.
+  // Texto de la pildora en Gasto Publicitario: hasta que dia llegan los datos y el ultimo barrido. Si GitHub no
+  // responde, la fecha de la ultima vez que cambiaron los datos.
   function syncPillLabel() {
     const latest = latestGastoMonth();
     if (!latest) return 'Sin informes de campaña';
-    const last = stampLabel(state.data && state.data.drive && state.data.drive.lastSync, false);
-    return `Datos al ${latest.lastDay} de ${latest.name.toLowerCase()}${last ? ` | sincronizado ${last}` : ''}`;
+    const info = sweepInfo();
+    const changed = stampLabel(state.data && state.data.drive && state.data.drive.lastSync, false);
+    const tail = info ? ` | barrido ${stampLabel(info.at, false)}${info.failed ? ' (falló)' : ''}` : changed ? ` | actualizado ${changed}` : '';
+    return `Datos al ${latest.lastDay} de ${latest.name.toLowerCase()}${tail}`;
   }
 
   function renderStatusCard() {
@@ -281,6 +328,7 @@
     const count = gasto.months.filter(month => month.hasData).length;
     const drive = (state.data && state.data.drive) || {};
     const last = stampLabel(drive.lastSync);
+    const info = sweepInfo();
     set('status-data', latest ? escapeHtml(`${dayRange(latest, latest.firstDay, latest.lastDay)} ${latest.year}`) : 'Sin informes');
     // Sin clave de API (hoy, el sitio publicado) el navegador no lee Drive: los datos son los de la ultima
     // publicacion, que arma la sincronizacion diaria de GitHub Actions, y Sincronizar vuelve a cargarla.
@@ -289,8 +337,17 @@
     const syncButton = document.getElementById('sync-now');
     if (syncButton) syncButton.title = fromBrowser ? 'Trae de Drive los informes de Google Ads' : 'Vuelve a cargar la última publicación del tablero';
     set('status-months', `${count} ${count === 1 ? 'mes' : 'meses'} con informe de campaña`);
-    set('status-last', last ? escapeHtml(`${last}${/^navegador/.test(drive.discovery || '') ? ' · desde el tablero' : ''}`) : 'Sin sincronizar');
+    let sweepHtml = sweep.status === 'error' ? 'No se pudo consultar GitHub' : 'Consultando...';
+    if (info) {
+      const result = info.running ? 'en curso' : info.ok ? 'correcto' : 'falló';
+      sweepHtml = `${escapeHtml(`${stampLabel(info.at)} · ${result}`)}${info.url ? ` · <a href="${escapeHtml(info.url)}" target="_blank" rel="noopener noreferrer">Ver</a>` : ''}`;
+    }
+    set('status-sweep', sweepHtml);
+    set('status-last', last ? escapeHtml(`${last}${/^navegador/.test(drive.discovery || '') ? ' · desde el tablero' : ''}`) : 'Sin datos de Drive');
     set('status-next', escapeHtml(nextSyncLabel()));
+    // Un barrido fallido o atrasado tine la pildora de ambar en todas las vistas.
+    const pill = document.getElementById('data-status-btn');
+    if (pill && info) pill.classList.toggle('warn', info.failed || info.stale);
     set('status-folder', folderHtml(folderName(), config.folderUrl));
     const kwLatest = gasto.kwMonths.get([...gasto.kwMonths.keys()].sort().pop());
     const kwLast = stampLabel(gasto.kwSync, false);
@@ -301,6 +358,8 @@
     set('status-kw-folder', folderHtml(kwFolderName(), config.keywords && config.keywords.folderUrl));
     // Aviso fijo del detalle: mes en curso y meses sin informe. Los mensajes del boton van aparte (#sync-status).
     const notes = [];
+    if (info && info.failed) notes.push('El último barrido falló: revisa la ejecución en GitHub > Actions.');
+    else if (info && info.stale) notes.push('No hay barrido desde hace más de un día: revisa el activador de Google Apps Script.');
     if (latest && !latest.complete) notes.push(`${latest.name} está en curso: el informe llega hasta el ${latest.lastDay} de ${latest.name.toLowerCase()}.`);
     const missing = missingMonths();
     if (missing.length) notes.push(`Falta el informe de campaña de ${missing.map(monthLabel).join(', ')}.`);
@@ -318,8 +377,11 @@
     button.addEventListener('click', event => {
       event.stopPropagation();
       const open = card.hidden;
-      // La proxima sincronizacion depende de la hora: se recalcula al abrir el detalle.
-      if (open) renderStatusCard();
+      // La proxima sincronizacion depende de la hora: se recalcula al abrir el detalle, junto con el ultimo barrido.
+      if (open) {
+        renderStatusCard();
+        loadLastSweep();
+      }
       card.hidden = !open;
       button.setAttribute('aria-expanded', String(open));
     });
@@ -851,6 +913,7 @@
         status: record.status || '',
         dailyBudget: isNum(record.dailyBudget) ? Number(record.dailyBudget) : null
       })),
+      excluded: month.excluded || [],
       detail,
       detailFirst: days.length ? Math.min(...days) : null,
       detailLast: days.length ? Math.max(...days) : null,
@@ -1050,7 +1113,7 @@
 
   function statusPill(status) {
     const plain = normalizeText(status);
-    const tone = /^habilitad/.test(plain) ? 'green' : !plain || /^(detenid|pausad|quitad|eliminad)/.test(plain) ? 'muted' : 'amber';
+    const tone = /^habilitad/.test(plain) ? 'green' : !plain || /^(detenid|pausad|en pausa|quitad|eliminad)/.test(plain) ? 'muted' : 'amber';
     return `<span class="status-pill ${tone}">${escapeHtml(status || 'Sin estado')}</span>`;
   }
 
@@ -1093,9 +1156,14 @@
     return missing;
   }
 
-  function renderAlerts() {
+  function renderAlerts(period) {
     const host = document.getElementById('gasto-alerts');
     if (!host) return;
+    // Campanas excluidas en los meses del periodo: su gasto no entra en ninguna cifra del tablero.
+    const excludedNotes = (period ? period.months : []).flatMap(month => month.excluded.map(item => (
+      `<b>Excluida:</b> ${escapeHtml(month.label)} no incluye la campaña «${escapeHtml(item.campaign)}» `
+      + `(${fmtMoney(item.cost)}, ${fmtCount(item.impressions)} impresiones, ${fmtCount(item.clicks)} clics): está excluida del tablero.`
+    )));
     const notes = missingMonths().map(key => {
       const [year, number] = key.split('-').map(Number);
       const nextMonth = gastoMonthByKey(monthKeyOf(number === 12 ? year + 1 : year, number === 12 ? 1 : number + 1));
@@ -1105,7 +1173,7 @@
       if (nextMonth && nextMonth.hasData) parts.push(`${escapeHtml(nextMonth.name)} queda sin mes anterior para comparar. `);
       parts.push('Sube el informe del mes a la carpeta y pulsa Sincronizar, arriba a la derecha.');
       return parts.join('');
-    });
+    }).concat(excludedNotes);
     host.innerHTML = notes.map(note => `<p>${note}</p>`).join('');
     host.hidden = !notes.length;
   }
@@ -1662,7 +1730,7 @@
   function renderGasto() {
     const period = currentPeriod();
     renderTabs(period);
-    renderAlerts();
+    renderAlerts(period);
     if (!period) {
       document.getElementById('gasto-period-title').textContent = 'Sin informes de campaña';
       document.getElementById('gasto-period-sub').textContent = `Sube el informe del mes a la carpeta ${folderName()} de Drive y sincroniza.`;
@@ -1804,6 +1872,7 @@
       selectMonth(initialMonth, false);
       state.chartView = normalizeView(readStoredView());
       renderAll();
+      loadLastSweep(true);
       window.dispatchEvent(new CustomEvent('sumi:data-ready', { detail: state.data }));
     } catch (error) {
       renderError(error.message);
