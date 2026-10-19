@@ -3,7 +3,6 @@
 const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
-const usuariosCifrado = require('./usuarios-cifrado');
 
 const ROOT = path.join(__dirname, '..');
 const DIST_DIR = path.join(ROOT, 'dist');
@@ -63,17 +62,8 @@ function main() {
   const driveJson = JSON.stringify(driveConfig).replace(/</g, '\\u003c');
   if (driveConfig.apiKey) console.log('[build] sincronizacion desde el navegador habilitada');
   else console.warn('[build] sin SUMI_DRIVE_API_KEY: el boton Sincronizar trae la ultima publicacion');
-  // El directorio de Usuarios y Claves esta cifrado en el repo: se descifra con SUMI_USERS_PRIVATE_KEY y viaja en
-  // claro dentro de este HTML (que se cifra con SUMI_PAGE_PASSWORD), con la llave publica para cifrar al exportar.
-  const directory = usuariosCifrado.readForBuild();
-  if (directory.locked) {
-    const warning = `Usuarios y Claves queda bloqueado (${directory.locked}): falta SUMI_USERS_PRIVATE_KEY o no abre el directorio`;
-    console.warn(process.env.GITHUB_ACTIONS ? `::warning::${warning}` : `[build] ${warning}`);
-  }
-  const usuarios = JSON.stringify(directory).replace(/</g, '\\u003c');
-  const usuariosKey = JSON.stringify(usuariosCifrado.publicKeyBase64());
 
-  html = html.replace('</head>', () => `<script>window.SUMI_RETAIL_DATA = ${data};window.SUMI_KEYWORDS_DATA = ${keywords};window.SUMI_DRIVE_CONFIG = ${driveJson};window.SUMI_USUARIOS = ${usuarios};window.SUMI_USUARIOS_PUBLIC_KEY = ${usuariosKey};</script></head>`);
+  html = html.replace('</head>', () => `<script>window.SUMI_RETAIL_DATA = ${data};window.SUMI_KEYWORDS_DATA = ${keywords};window.SUMI_DRIVE_CONFIG = ${driveJson};</script></head>`);
 
   try {
     fs.rmSync(DIST_DIR, { recursive: true, force: true });
