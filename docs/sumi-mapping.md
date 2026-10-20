@@ -50,11 +50,27 @@ Dashboard estatico de SUMI con lectura de gasto publicitario: marca, visual y mo
 CTR, CPC, tasa y costo por conversion no se guardan: se calculan de las sumas. Las filas `Total: ...` se ignoran.
 Gasto Publicitario lee este JSON tal como lo publica el build, sin las campanas de `keywords.excludeCampaigns`.
 
+## Leads (CRM de feedback, hoja privada)
+
+Pestana "Leads por campana": una fila por mes y campana con lo que completa el cliente.
+
+| Columna de la hoja | Uso |
+| --- | --- |
+| `mes` | Mes (AAAA-MM) |
+| `plataforma` / `campana` | Google Ads, Meta Ads u Otro; nombre tecnico de la campana del informe |
+| `leads` / `calificados` / `ventas` | Conteos enteros que completa el cliente (vacio = sin dato) |
+| `monto` | Monto vendido en soles |
+| `actualizado` | Marca de tiempo del Web App |
+
+No se guardan en `data/`: viven en la hoja privada (`scripts/apps-script/crm-leads.gs`).
+
 ## Archivos clave
 
 - `js/objectives.js`: Gasto Publicitario: pestanas de mes y Anual, periodo con KPIs, grafico de la cuenta,
   distribucion y cuadro por campana y ranking de palabras clave; expone `SumiDashboard` (`snapshot()`).
 - `js/projections.js`: proyeccion al cierre y simulador de objetivo; lee `SumiDashboard.snapshot()`.
+- `js/leads.js`: CRM de feedback del cliente (pestana Leads): tabla por campana con las columnas del cliente editables.
+- `scripts/apps-script/crm-leads.gs`: Web App de la hoja privada donde se guarda lo que completa el cliente.
 - `js/keywords.js`: analisis de palabras clave y boton Actualizar (lee las hojas de Drive desde el navegador).
 - `data/sumi-lima-retail-2026.json`: fuente normalizada.
 - `data/sumi-palabras-clave-2026.json`: informe de palabras clave normalizado (`scripts/sync-keywords.py`).

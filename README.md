@@ -225,6 +225,47 @@ costo puede diferir en centimos por el redondeo por fila). Un CSV subido sin con
 sincronizacion diaria, pero sin API key el boton Actualizar solo lee hojas de Google Sheets.
 
 
+## Leads (CRM de feedback del cliente)
+
+Pestana **Leads** del panel lateral (`js/leads.js`). Una tabla por campana y mes: la plataforma se carga sola y
+el cliente completa en las columnas resaltadas lo que de verdad recibio; el tablero calcula los indicadores que
+las plataformas no ven.
+
+- **Se habilita solo con campanas de leads o WhatsApp** (`detectObjective`): en Google Ads, Busqueda,
+  Maximo rendimiento y Demand Gen (no Shopping, Display ni Video); en Meta Ads, el objetivo Clientes potenciales
+  o Mensajes; un nombre con WhatsApp o mensajes va como WhatsApp. Si la marca no tiene ninguna, la pestana no
+  aparece. En SUMI entra su campana de Busqueda (Landing Page 001).
+- **Se cargan solos**, del modulo Gasto Publicitario (`SumiDashboard.snapshot()`): la inversion y los leads
+  que reporta la plataforma. En Google Ads son sus conversiones (contactos); en Meta Ads serian los formularios o
+  las conversaciones de WhatsApp, cuando la marca tenga esa data (`platformMonths` es el punto para sumarla).
+- **Lo completa el cliente** (columnas resaltadas, con guardado automatico): leads reales, calificados, ventas y
+  monto vendido de cada campana en el mes. Vacio = sin dato. Se valida que sean enteros desde 0 y que no haya mas
+  calificados que leads ni mas ventas que calificados. En "Todo el ano" la tabla suma los meses y queda de solo
+  lectura. La columna Campana queda fija al desplazarse.
+- **Indicadores por campana y en total**: coincidencia (leads reales / de la plataforma), costo por lead de la
+  plataforma y real, tasa de calificacion y de cierre, costo por calificado, costo por venta y ROAS (monto
+  vendido / inversion). Cada cociente usa solo las campanas y meses que tienen ese dato completo, asi la tabla a
+  medio llenar no infla los costos; los KPIs dicen cuantas campanas estan completadas.
+- **Guardado**: en una hoja de Google privada de la agencia (pestana "Leads por campana", una fila por mes y
+  campana), a traves del Web App de `scripts/apps-script/crm-leads.gs`. Nunca pasa por el repositorio publico.
+  Sin el Web App conectado, el modulo guarda solo en el navegador y lo avisa ("Modo de prueba").
+
+### Conectar la hoja privada (una sola vez)
+
+1. Crear una hoja de calculo de Google (por ejemplo "SUMI - CRM de leads") en la cuenta de la agencia.
+2. En la hoja: Extensiones > Apps Script, pegar `scripts/apps-script/crm-leads.gs` y guardar.
+3. Ejecutar `crearToken` una vez (aceptar los permisos): crea la pestana "Leads por campana" y deja el token en
+   el registro de ejecucion.
+4. Implementar > Nueva implementacion > Aplicacion web: ejecutar como **Yo**, acceso **Cualquier usuario**.
+   Copiar la URL que termina en `/exec`.
+5. En GitHub > Settings > Secrets and variables > Actions, crear `SUMI_CRM_URL` (la URL) y `SUMI_CRM_TOKEN` (el
+   token). El siguiente deploy los incrusta dentro del HTML cifrado.
+
+"Cualquier usuario" deja la URL abierta, pero sin el token responde "No autorizado"; el token solo existe en el
+secret y dentro del HTML cifrado con `SUMI_PAGE_PASSWORD`. Para cambiarlo: ejecutar otra vez `crearToken` y
+actualizar `SUMI_CRM_TOKEN`. Si se edita el script, hay que publicar una version nueva de la implementacion
+(Implementar > Gestionar implementaciones) para que la URL use el codigo nuevo.
+
 ## Fuente de datos
 
 El tablero se arma desde la carpeta de Google Drive **Google Ads SUMI Campañas**:
