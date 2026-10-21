@@ -1770,6 +1770,8 @@
     }
     renderStatusCard();
     if (state.data && gasto.months.length) renderGasto();
+    // Generacion de Reporte arma su pagina de palabras clave con estos meses: se repinta al llegar.
+    window.dispatchEvent(new CustomEvent('sumi:keywords-ready'));
   }
 
   function updateSourceLabels() {
@@ -1922,6 +1924,19 @@
       })
     };
   }
+
+  // Generacion de Reporte arma el PDF del mes con los mismos calculos de Gasto Publicitario: periodo, totales,
+  // campanas y palabras clave del mes.
+  window.SumiGasto = {
+    months: () => gasto.months.filter(month => month.hasData),
+    period: key => periodOf(gastoMonthByKey(key)),
+    totals: periodTotals,
+    previous: previousTotals,
+    campaigns: periodCampaigns,
+    keywords: period => (gasto.kwMonths && gasto.kwMonths.size ? keywordRows(keywordScope(period).months) : null),
+    keywordLabel: period => (gasto.kwMonths && gasto.kwMonths.size ? keywordScope(period).label : ''),
+    campaignLabel
+  };
 
   // Interfaz publica del modulo: drive-sync.js la usa para pintar la data que
   // acaba de traer de Drive sin recargar la pagina.

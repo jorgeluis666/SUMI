@@ -225,6 +225,35 @@ costo puede diferir en centimos por el redondeo por fila). Un CSV subido sin con
 sincronizacion diaria, pero sin API key el boton Actualizar solo lee hojas de Google Sheets.
 
 
+## Generacion de Reporte
+
+Pestana **Generacion de Reporte** del panel lateral: el "Reporte de Publicidad" del mes con el diseño del modelo
+de SUMI (`Modelo Reporte SUMI`), 6 laminas 16:9 con fondo claro, tarjetas blancas de borde fino y acentos en azul.
+El modulo es `js/report-week.js`; sus estilos y los de impresion estan en `css/dashboard.css` (bloque "Generacion
+de Reporte"). El template es propio de SUMI: cada tablero de marca tiene el suyo, adaptado por la marca.
+
+| Pagina | Contenido |
+| --- | --- |
+| Portada | Logo de Lima Retail, "Reporte de Publicidad", cliente (SUMI) y periodo ("1 – 18 Octubre 2026 \| Google Ads · Search"). |
+| Resumen del mes | Ocho indicadores (inversion, conversiones, costo/conv., clics, CPC medio, tasa de conversion, contactos por dia y terminos activos), clics y conversiones por dia y el recuadro "Clave". |
+| Rendimiento por campana | Campanas de busqueda por inversion (coste, clics, conv., costo/conv.) y el recuadro "Analisis". |
+| Palabras clave que convierten | Hasta 7 terminos por conversiones (con sus decimales de Google Ads), barras del top 5 y el recuadro "Que funciona". |
+| Conclusiones | Tres tarjetas (tasa de conversion, el termino motor y presupuesto) y la nota del periodo. |
+| Cierre | Logo y firma de Lima Retail. |
+
+- **De donde salen los numeros:** de Gasto Publicitario, que los expone en `window.SumiGasto` (`js/objectives.js`):
+  el periodo del mes, sus totales, las campanas y las palabras clave del mes. Cada sincronizacion lo actualiza
+  solo; las palabras clave llegan despues (`sumi:keywords-ready`).
+- **Palabras clave:** la misma palabra en varias campanas o con dos concordancias va en una sola fila.
+- **Grafico por dia:** usa el informe por dia y campana del mes (`months[].detail`). Mientras no llegue, el grafico
+  avisa que falta subirlo.
+- **Textos:** la lectura del grafico, "Clave", "Analisis", "Que funciona" y las conclusiones vienen propuestos con
+  los numeros del mes; se editan con un clic sobre la lamina (`**texto**` va en negrita) y quedan guardados por mes
+  en este navegador. **Restablecer textos** vuelve a los propuestos, sin dialogo de confirmacion.
+- **Descargar PDF:** abre la impresion del navegador con paginas de 1280 x 720 px; el archivo sale como
+  `Reporte_SUMI_<Mes><Ano>.pdf` (o con el rango de dias si el mes esta en curso).
+
+
 ## Leads (CRM de feedback del cliente)
 
 Pestana **Leads** del panel lateral (`js/leads.js`). Una tabla por campana y mes: la plataforma se carga sola y
