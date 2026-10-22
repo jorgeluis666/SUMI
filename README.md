@@ -8,7 +8,7 @@ entra en el tablero: los informes de Drive tienen que salir de la cuenta de Land
 
 Es una copia adaptada del tablero de Aquarius (`jorgeluis666/objetivos-Aquarius`), con los mismos modulos.
 
-Version actual: `v1.6.0`.
+Version actual: `v1.7.0`.
 
 ## Acceso
 
@@ -25,7 +25,7 @@ lateral.
 
 ## Modulo principal
 
-- Titulo: `Gasto Publicitario`
+- Titulo: `Gasto publicitario · Leads en Google Ads` (patron de Royal Baby: "Modulo · subtitulo")
 - Subtitulo: `Leads en Google Ads`
 - La sincronizacion (boton Sincronizar, ultimo y proximo barrido, carpetas de Drive) esta en la pildora de la barra
   superior derecha (ver Sincronizacion > Manual, desde el tablero).
@@ -35,14 +35,14 @@ lateral.
 - **Pestanas de mes**: Enero a Diciembre y **Anual**. Un mes sin informe de campana queda apagado y el punto
   marca el ultimo mes con datos. La eleccion se guarda en `sumi_selected_month` (`anual` incluido). Si falta el
   informe de un mes entre el primero y el ultimo, un aviso lo dice.
-- **Periodo** (`Periodo: 1-30 Setiembre 2026`, o `1-4 Octubre 2026 (mes en curso)`) con 8 KPIs: inversion,
+- **Periodo** (`Periodo: 1-30 Septiembre 2026`, o `1-4 Octubre 2026 (mes en curso)`) con 8 KPIs: inversion,
   impresiones, clics, CTR, CPC, conversiones, costo por conversion y tasa de conversion (conversiones / clics).
   Los cocientes se recalculan sobre las sumas.
   - Mes cerrado: contra el mes anterior completo. Mes en curso: contra el mes anterior **prorrateado a los
-    mismos dias** ("vs Setiembre prorrateado a 4 dias"), porque el informe trae un total por mes; CTR, CPC,
+    mismos dias** ("vs Septiembre prorrateado a 4 dias"), porque el informe trae un total por mes; CTR, CPC,
     costo y tasa no cambian al prorratear. Cuando llegue el informe por dia y campana (`months[].detail`) y
     cubra esos dias del mes anterior, inversion, clics y conversiones se comparan con el **mismo tramo real**
-    ("1-4 Setiembre") y las impresiones (que ese informe no trae) siguen prorrateadas; un cociente sale del
+    ("1-4 Septiembre") y las impresiones (que ese informe no trae) siguen prorrateadas; un cociente sale del
     tramo si sus dos sumas son reales (CPC, costo y tasa) y si no, es el del mes anterior completo (CTR). Cada
     KPI dice contra que se compara y la bajada lo resume; cada campana usa su propio tramo. Solo el mes
     calendario anterior: si falta (setiembre, el primer mes), "Sin mes anterior para comparar" y no hay
@@ -63,7 +63,7 @@ lateral.
     (por defecto), clics, impresiones y costo por conversion (inversion / conversiones del mes, el mismo del
     KPI; un mes sin conversiones queda como hueco). Cada punto lleva su valor (arriba en un pico, abajo en un
     valle; sin etiqueta en los ceros y, si dos chocan, una queda solo en el tooltip); los soles van sin
-    decimales salvo montos menores a S/ 10. Con varios indicadores, cada uno en su panel con su escala sobre
+    decimales salvo montos menores a S/. 10. Con varios indicadores, cada uno en su panel con su escala sobre
     el mismo eje, o con el boton `Un solo cuadro` todos juntos, un color por indicador y cada uno con su escala
     (sin eje: el valor va en el punto).
   - Por dia no se ofrece (no hay serie diaria por campana): queda listo para cuando llegue un informe por dia
@@ -489,3 +489,8 @@ Detalles:
 | Isotipo de la barra lateral | `assets/sumi-isotipo.png` (logotipo blanco de sumiperu.com sobre `#041421`) |
 | Color de marca (azul SUMI `#194d9f`) | `css/dashboard.css`, variables `--brand*` y colores de los graficos en `js/` |
 | Fondo del acceso | `assets/login-bg.jpg` (el mismo de los demas tableros) |
+
+Convenciones de Royal Baby (v1.7.0): montos en `S/. ` con es-PE, `—` para un dato vacio, "Septiembre" en pantalla
+(los informes con "Setiembre" se siguen leyendo), tildes completas, pestana de mes activa en `--brand-soft` /
+`--brand-text` / `--brand-border`, encabezados de tabla en mayusculas a 700 y .08em sobre `#f8fbff`, numeros en
+monoespaciada y graficos en Inter con ticks `#94A3B8` y grilla `rgba(15,23,42,.06)`. El azul SUMI no cambia.

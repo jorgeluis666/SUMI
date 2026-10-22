@@ -19,7 +19,7 @@
   const SCOPE = 'Campaña de búsqueda B2B (seguridad industrial / EPP) para contactos';
   const CLICKS_COLOR = '#2563eb';
   const CONV_COLOR = '#16a34a';
-  const MONTHS = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Setiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+  const MONTHS = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
   const ICONS = {
     search: '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',
@@ -35,10 +35,10 @@
   const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
   const isNum = value => value !== null && value !== undefined && value !== '' && Number.isFinite(Number(value));
 
-  // ── Formatos del modelo ("S/ 471", "S/ 1.83", "52.1%", "202.5") ──────────
+  // ── Formatos del modelo ("S/. 471", "S/. 1.83", "52.1%", "202.5") ──────────
   const integer = new Intl.NumberFormat('es-PE', { maximumFractionDigits: 0 });
-  const money = value => (isNum(value) ? `S/ ${integer.format(Math.round(value))}` : '—');
-  const money2 = value => (isNum(value) ? `S/ ${Number(value).toFixed(2)}` : '—');
+  const money = value => (isNum(value) ? `S/. ${integer.format(Math.round(value))}` : '—');
+  const money2 = value => (isNum(value) ? `S/. ${Number(value).toFixed(2)}` : '—');
   const count = value => (isNum(value) ? integer.format(Math.round(value)) : '—');
   // Google Ads reparte conversiones entre palabras: en la tabla van con su decimal si lo tienen (202.5).
   const conv = value => (!isNum(value) ? '—' : Math.abs(value - Math.round(value)) < 0.005 ? integer.format(Math.round(value)) : Number(value).toFixed(1));
@@ -506,7 +506,7 @@
     const select = document.getElementById('week-select');
     if (!available.length) {
       if (select) select.innerHTML = '<option value="">Sin meses con datos</option>';
-      host.innerHTML = '<div class="panel"><div class="empty-state"><strong>Todavia no hay datos para el reporte</strong><span>El reporte se arma con los informes de Google Ads. En cuanto haya un mes con inversion, aparece aqui.</span></div></div>';
+      host.innerHTML = '<div class="panel"><div class="empty-state"><strong>Todavía no hay datos para el reporte</strong><span>El reporte se arma con los informes de Google Ads. En cuanto haya un mes con inversión, aparece aquí.</span></div></div>';
       return;
     }
     if (!available.some(item => item.id === state.month)) state.month = available[0].id;
