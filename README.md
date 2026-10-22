@@ -388,6 +388,12 @@ datos, las dos carpetas de Drive (con enlace) y lo que falta subir. A su lado va
 boton Actualizar). Si la sincronizacion falla, la pildora se pone ambar y el detalle
 dice por que. Su comportamiento depende de `data/drive-config.json`:
 
+- **Con el Web App del barrido** (`SUMI_SYNC_URL`, el que manda sobre los demas): el boton le pide a
+  `scripts/apps-script/sincronizar-sumi.gs`, publicado como aplicacion web, el mismo barrido de las 10:00
+  (`sync-drive.yml`). Sigue la corrida por la API publica de GitHub: si Drive trajo cambios espera la
+  publicacion y recarga; si no, avisa que el tablero ya estaba al dia. Como mucho un barrido cada 4
+  minutos para todos los visitantes. La URL llega por el secret `SUMI_SYNC_URL` y solo queda dentro
+  del HTML cifrado.
 - **Con `apiKey`**: el navegador lee la carpeta y los informes (hojas o CSV)
   directo de Drive, actualiza el tablero sin recargar y guarda el resultado en
   `localStorage`. Ademas se sincroniza solo cuando pasaron `autoSyncHours` horas

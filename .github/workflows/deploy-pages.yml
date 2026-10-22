@@ -31,6 +31,7 @@ jobs:
         env:
           SUMI_PAGE_PASSWORD: ${{ secrets.SUMI_PAGE_PASSWORD }}
           # CRM de leads (modulo Leads): Web App de la hoja privada. Sin ellos el modulo guarda en el navegador.
+          SUMI_SYNC_URL: ${{ secrets.SUMI_SYNC_URL }}
           SUMI_CRM_URL: ${{ secrets.SUMI_CRM_URL }}
           SUMI_CRM_TOKEN: ${{ secrets.SUMI_CRM_TOKEN }}
         run: |
