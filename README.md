@@ -201,26 +201,25 @@ carpeta de Drive **Google Ads SUMI Keywords**, una hoja de calculo por mes (`SUM
 
 ### Datos y sincronizacion
 
-- `scripts/sync-keywords.py` exporta cada hoja como CSV (`docs.google.com/spreadsheets/d/<id>/export?format=csv`,
-  sin credenciales mientras la carpeta siga compartida por enlace) y escribe
+- `scripts/sync-keywords.py` recibe cada hoja ya exportada como CSV del Apps Script de SUMI (la carpeta es
+  privada, ver "Carpetas privadas") y escribe
   `data/sumi-palabras-clave-2026.json`, `data/keywords-manifest.json` y una copia de cada informe en
   `data/csv-backups/keywords/`. El mes sale de la linea de rango del informe ("1 de septiembre de 2026 - ...")
   y, si no esta, del nombre del archivo. Reusa los helpers de `scripts/sync-drive.py`.
 - **Todos los dias**: es un paso mas de `.github/workflows/sync-drive.yml` (10:00 en Lima). Si cambio algo,
   hace commit y publica el tablero. Cada carpeta se sincroniza aunque la otra falle. Si la carpeta no trae
   ningun informe el paso falla (y el workflow queda en rojo), pero los meses ya cargados se conservan.
-- **Boton Actualizar** (en el filtro): el navegador vuelve a leer las hojas de Drive y repinta el modulo sin
-  recargar. La exportacion CSV de Sheets permite CORS, asi que **no necesita API key**; el resultado queda en
-  `localStorage` (`sumi_keywords_cache`) y gana contra la publicacion mientras sea mas reciente. Sin API
-  key usa la lista de hojas que dejo la ultima sincronizacion diaria: una hoja de un mes nuevo aparece al dia
-  siguiente (o al correr el workflow a mano). Con `SUMI_DRIVE_API_KEY` incrustada en el build, el boton tambien
-  lista la carpeta y encuentra los meses nuevos al instante.
+- **Boton Actualizar** (en el filtro): como el navegador ya no puede bajar las hojas privadas, pide el mismo
+  barrido del servidor que el boton Sincronizar (`SUMI_SYNC_URL`), que trae tambien las palabras clave, y
+  muestra el avance en su propio estado. Sin esa URL trae la ultima publicacion. Solo con
+  `SUMI_DRIVE_API_KEY` incrustada en el build lee Drive desde el navegador y guarda el resultado en
+  `localStorage`.
 - La carpeta y su ID estan en `data/drive-config.json` (`keywords.folderId`).
 - **Campanas excluidas**: `keywords.excludeCampaigns` en `data/drive-config.json` lista campanas que no se
   muestran ni se guardan aunque vengan en el informe (hoy ninguna). Se filtran en la sincronizacion diaria, en
   el boton Actualizar y al mostrar. La copia cruda del informe en `data/csv-backups/keywords/` las conserva.
-- Las hojas tienen que estar en **Google Ads SUMI Keywords**, que es la carpeta compartida por enlace. Una hoja en
-  otra carpeta sin compartir (por ejemplo "Términos de Búsqueda SUMI") responde 401 y no se puede leer.
+- Las hojas tienen que estar en **Google Ads SUMI Keywords**. El Apps Script solo lee esa carpeta y la de
+  campanas (`CARPETAS_LECTURA`); una hoja en otra carpeta (por ejemplo "Términos de Búsqueda SUMI") queda fuera.
 
 ```bash
 python scripts/sync-keywords.py          # sincroniza
@@ -385,10 +384,26 @@ python scripts/sync-drive.py          # sincroniza
 python scripts/sync-drive.py --check  # dice si hay cambios, sin escribir
 ```
 
-El script encuentra los archivos en este orden: API de Drive (si hay API key),
-vista publica de la carpeta (sin credenciales, mientras siga compartida por
-enlace) y, como ultimo recurso, `data/drive-manifest.json`. Las hojas de calculo
-se exportan como CSV (`docs.google.com/spreadsheets/d/<id>/export?format=csv`).
+El script encuentra los archivos en este orden: Apps Script de SUMI (si hay
+`SUMI_DRIVE_SCRIPT_URL` y `SUMI_DRIVE_READ_KEY`), API de Drive (si hay API key),
+vista publica de la carpeta (solo si siguiera compartida por enlace) y, como
+ultimo recurso, `data/drive-manifest.json`. Las hojas de calculo se exportan como
+CSV (`docs.google.com/spreadsheets/d/<id>/export?format=csv`).
+
+### Carpetas privadas
+
+Las carpetas de campanas y palabras clave no se comparten por enlace (sus IDs estan en este repositorio
+publico). El barrido las lee con la accion `leer` del mismo Web App del boton Sincronizar
+(`scripts/apps-script/sincronizar-sumi.gs`), que corre con la cuenta duena de las carpetas:
+
+- Solo responde con la clave `LECTURA_CLAVE` de las Propiedades del script, enviada por POST (nunca en la
+  URL), y solo para las dos carpetas de `CARPETAS_LECTURA`. Devuelve cada hoja exportada como CSV.
+- En GitHub la clave es el secret `SUMI_DRIVE_READ_KEY` y la URL es la de `SUMI_SYNC_URL`
+  (`sync-drive.yml` la pasa como `SUMI_DRIVE_SCRIPT_URL`).
+- Al editar el script hay que publicar una version nueva de la misma implementacion (Implementar >
+  Gestionar implementaciones > lapiz > Version: Nueva version), para que la URL no cambie, y ejecutar
+  `probarLectura` una vez para aceptar el permiso de Drive.
+- Para probar en local: `SUMI_DRIVE_SCRIPT_URL=<url> SUMI_DRIVE_READ_KEY=<clave> python scripts/sync-drive.py --check`.
 
 ### Manual, desde el tablero
 

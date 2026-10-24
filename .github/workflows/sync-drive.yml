@@ -31,10 +31,13 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       # El script usa solo la biblioteca estandar: el Python del runner alcanza.
-      # Sin SUMI_DRIVE_API_KEY lee la carpeta por su vista publica, que no pide credenciales.
+      # Las carpetas son privadas: las lee el Apps Script de SUMI (la misma URL del boton
+      # Sincronizar, SUMI_SYNC_URL) con la clave SUMI_DRIVE_READ_KEY.
       - name: Sincronizar con Drive
         id: sync
         env:
+          SUMI_DRIVE_SCRIPT_URL: ${{ secrets.SUMI_SYNC_URL }}
+          SUMI_DRIVE_READ_KEY: ${{ secrets.SUMI_DRIVE_READ_KEY }}
           SUMI_DRIVE_API_KEY: ${{ secrets.SUMI_DRIVE_API_KEY }}
         run: python3 scripts/sync-drive.py
 
@@ -43,6 +46,8 @@ jobs:
         id: keywords
         if: ${{ !cancelled() }}
         env:
+          SUMI_DRIVE_SCRIPT_URL: ${{ secrets.SUMI_SYNC_URL }}
+          SUMI_DRIVE_READ_KEY: ${{ secrets.SUMI_DRIVE_READ_KEY }}
           SUMI_DRIVE_API_KEY: ${{ secrets.SUMI_DRIVE_API_KEY }}
         run: python3 scripts/sync-keywords.py
 
