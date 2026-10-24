@@ -310,8 +310,11 @@
   // --- Estado del boton ---
 
   let running = false;
+  // Palabras clave pide el mismo barrido del servidor y lo sigue en su propio estado.
+  let follower = null;
 
   function setStatus(text, tone) {
+    if (follower) follower.status(text, tone);
     // Un error tine de ambar la pildora de la barra superior: el mensaje queda en su detalle.
     const pill = document.getElementById('data-status-btn');
     if (pill) pill.classList.toggle('warn', tone === 'is-error');
@@ -323,6 +326,7 @@
   }
 
   function setBusy(busy) {
+    if (follower) follower.busy(busy);
     const button = document.getElementById('sync-now');
     if (!button) return;
     button.classList.toggle('is-busy', busy);
@@ -421,9 +425,10 @@
     throw new Error('la sincronización tarda más de lo normal; el tablero se actualiza al terminar');
   }
 
-  async function syncOnServer() {
+  async function syncOnServer(watcher) {
     if (running) return;
     running = true;
+    follower = watcher || null;
     setBusy(true);
     setStatus('Pidiendo la sincronización con Drive...', 'is-working');
     const asked = Date.now();
@@ -456,6 +461,7 @@
     } finally {
       running = false;
       setBusy(false);
+      follower = null;
     }
   }
 
@@ -529,6 +535,7 @@
     parseCampaignReport: parseCampaignReport,
     sync: () => syncFromDrive(false),
     syncOnServer,
+    hasSyncUrl,
     isConfigured: hasApiKey
   };
 
