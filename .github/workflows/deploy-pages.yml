@@ -34,13 +34,16 @@ jobs:
           SUMI_SYNC_URL: ${{ secrets.SUMI_SYNC_URL }}
           SUMI_CRM_URL: ${{ secrets.SUMI_CRM_URL }}
           SUMI_CRM_TOKEN: ${{ secrets.SUMI_CRM_TOKEN }}
+          # Correos de la alerta (ruedita de Notificaciones): Web App alertas-destinatarios.gs.
+          SUMI_ALERTAS_URL: ${{ secrets.SUMI_ALERTAS_URL }}
+          SUMI_ALERTAS_TOKEN: ${{ secrets.SUMI_ALERTAS_TOKEN }}
         run: |
           # Sin clave no se publica: el tablero quedaria abierto a cualquiera con el enlace.
           if [ -z "$SUMI_PAGE_PASSWORD" ]; then echo "::error::Falta el secret SUMI_PAGE_PASSWORD"; exit 1; fi
           node scripts/build.js
           # Ultimo control: lo que se sube tiene que ser la pantalla de acceso, no el tablero en claro.
           grep -q 'id="gate-payload"' dist/index.html || { echo "::error::dist/index.html no salio cifrado"; exit 1; }
-          if grep -qE 'SUMI_(RETAIL|KEYWORDS)_DATA|SUMI_CRM' dist/index.html; then echo "::error::dist/index.html trae los datos en claro"; exit 1; fi
+          if grep -qE 'SUMI_(RETAIL|KEYWORDS)_DATA|SUMI_(CRM|ALERTAS)' dist/index.html; then echo "::error::dist/index.html trae los datos en claro"; exit 1; fi
 
       - uses: actions/upload-pages-artifact@v3
         with:
