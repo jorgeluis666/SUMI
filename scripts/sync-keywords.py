@@ -84,19 +84,21 @@ def report_campaign(month_id):
     return names.pop() if len(names) == 1 else FALLBACK_CAMPAIGN
 
 
-def parse_share(value):
+def parse_share(value, comma=False):
     """Las cuotas de impresiones vienen acotadas ("< 10%", "> 90%"): se guardan tal cual."""
     text = str(value or "").strip()
     return None if text in {"", "--", "-"} else text
 
 
-def parse_count(value):
+def parse_count(value, comma=False):
     """Enteros con separador de miles.
 
     Al pasar el CSV a hoja de calculo, Sheets leyo "1,290" como 1.29 y lo exporta "1,29":
     se pierden los ceros finales. El grupo despues de la coma siempre tiene tres digitos,
     asi que se completa con ceros ("1,29" -> 1290, "1,2" -> 1200).
     """
+    if comma:
+        return drive.parse_int(value, True)
     text = str(value or "").strip()
     match = re.fullmatch(r"(\d{1,3}(?:,\d{3})*),(\d{1,2})", text)
     if match:
@@ -133,6 +135,7 @@ def parse_keyword_report(text, name):
             columns[mapped[0]] = (position, mapped[1])
     campaign = None if "campaign" in columns else report_campaign(month_id)
 
+    comma = drive.uses_decimal_comma(rows[header_index + 1:], columns.get("cost", (None,))[0])
     keywords = []
     for row in rows[header_index + 1:]:
         if not row or not any(cell.strip() for cell in row):
@@ -143,7 +146,7 @@ def parse_keyword_report(text, name):
         entry = {}
         for field, (position, kind) in columns.items():
             raw = row[position] if position < len(row) else None
-            value = str(raw or "").strip() if kind == "text" else PARSERS[kind](raw)
+            value = str(raw or "").strip() if kind == "text" else PARSERS[kind](raw, comma)
             if value not in (None, ""):
                 entry[field] = value
         if campaign:

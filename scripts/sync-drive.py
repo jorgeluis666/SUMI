@@ -97,11 +97,27 @@ def normalize(text):
     return re.sub(r"\s+", " ", value.translate(str.maketrans("\u00e1\u00e9\u00ed\u00f3\u00fa\u00fc\u00f1", "aeiouun")))
 
 
-def parse_number(value):
+def uses_decimal_comma(rows, cost_position):
+    """Infer locale from decimal money/percent cells, never integer counts."""
+    es = en = 0
+    for row in rows:
+        for position, cell in enumerate(row):
+            text = cell.strip()
+            if position != cost_position and not text.endswith("%"):
+                continue
+            if re.fullmatch(r"-?(?:\d+|\d{1,3}(?:\.\d{3})+),\d{1,2}%?", text):
+                es += 1
+            elif re.fullmatch(r"-?(?:\d+|\d{1,3}(?:,\d{3})+)\.\d{1,2}%?", text):
+                en += 1
+    return es > en
+
+
+def parse_number(value, comma=False):
     text = str(value or "").strip()
     if not text or text in {"--", "-"} or text.startswith("<"):
         return None
-    cleaned = re.sub(r"[^\d,.\-]", "", text).replace(",", "")
+    cleaned = re.sub(r"[^\d,.\-]", "", text)
+    cleaned = cleaned.replace(".", "").replace(",", ".") if comma else cleaned.replace(",", "")
     if not cleaned or cleaned in {"-", ".", "-."}:
         return None
     try:
@@ -111,18 +127,21 @@ def parse_number(value):
     return int(number) if number.is_integer() else number
 
 
-def parse_percent(value):
-    number = parse_number(value)
+def parse_percent(value, comma=False):
+    number = parse_number(value, comma)
     return None if number is None else number / 100
 
 
-def parse_int(value):
+def parse_int(value, comma=False):
     """Enteros con separador de miles.
 
     Al pasar el CSV a hoja de calculo, Sheets puede leer "1,290" como 1.29 y exportarlo "1,29": se
     pierden los ceros finales. El grupo despues de la coma siempre tiene tres digitos, asi que se
     completa con ceros ("1,29" -> 1290, "1,2" -> 1200).
     """
+    if comma:
+        number = parse_number(value, True)
+        return None if number is None else int(round(number))
     text = str(value or "").strip()
     match = re.fullmatch(r"(\d{1,3}(?:,\d{3})*),(\d{1,2})", text)
     if match:
@@ -159,7 +178,7 @@ def period_from_text(text):
     return {"start": dates[0], "end": dates[-1]} if len(dates) >= 2 else None
 
 
-def add_budget(budgets, entry, row, positions):
+def add_budget(budgets, entry, row, positions, comma=False):
     """Anota estado y presupuesto diario de la campana y lo suma al del mes si esta habilitada."""
     def cell(field):
         position = positions.get(field)
@@ -168,7 +187,7 @@ def add_budget(budgets, entry, row, positions):
     status = cell("status")
     kind = normalize(cell("budgetType"))
     # Un presupuesto total de campana no es diario.
-    amount = parse_number(cell("budget")) if not kind or kind.startswith("diari") else None
+    amount = parse_number(cell("budget"), comma) if not kind or kind.startswith("diari") else None
     if status:
         entry["status"] = status
     if amount is None:
@@ -355,6 +374,7 @@ def parse_campaign_report(text, name):
         if budget_field and budget_field not in budget_columns:
             budget_columns[budget_field] = position
 
+    comma = uses_decimal_comma(rows[header_index + 1:], columns.get("cost", (None,))[0])
     records = []
     totals = {}
     budgets = {}
@@ -366,14 +386,14 @@ def parse_campaign_report(text, name):
         entry = {}
         for field, (position, kind) in columns.items():
             raw = row[position] if position < len(row) else None
-            entry[field] = str(raw or "").strip() if kind == "text" else PARSERS[kind](raw)
+            entry[field] = str(raw or "").strip() if kind == "text" else PARSERS[kind](raw, comma)
         if first.startswith("total"):
             # Total: Campanas filtradas trae los totales del mes ya calculados.
             if first.startswith("total: campanas") or not totals:
                 totals = {field: entry.get(field) for field in total_fields}
             continue
         if entry.get("campaign"):
-            add_budget(budgets, entry, row, budget_columns)
+            add_budget(budgets, entry, row, budget_columns, comma)
             records.append(entry)
     summary = {"period": period, "dailyBudget": round(sum(budgets.values()), 2) if budgets else None}
     return month_id, records, totals, summary
