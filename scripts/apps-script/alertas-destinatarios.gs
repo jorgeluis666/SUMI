@@ -1,5 +1,5 @@
 /**
- * Sumi · destinatarios de la alerta de Google Ads.
+ * SUMI · destinatarios de la alerta de Google Ads.
  *
  * Guarda la lista de correos que se edita con la ruedita de Notificaciones del tablero. La alerta
  * (scripts/alertas.js) la lee antes de cada envio. La lista y la clave viven en las propiedades de

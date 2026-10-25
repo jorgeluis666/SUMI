@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /* ============================================================
-   scripts/alertas.js — Alerta de Google Ads de Sumi.
+   scripts/alertas.js — Alerta de Google Ads de SUMI.
 
    Sale los lunes a las 6:00 p. m. de Lima (ALERTA_MOTIVO=lunes, una vez por semana) y cada vez que
    entran datos nuevos al repositorio (ALERTA_MOTIVO=datos: solo si cambiaron las cifras del mes

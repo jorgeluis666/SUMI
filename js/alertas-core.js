@@ -22,7 +22,7 @@
   else root.SumiAlertas = api;
 })(typeof self !== 'undefined' ? self : this, function () {
   const MARCA = 'SUMI';
-  // Cada marca nombra distinto el resultado de la cuenta (Sumi dice conversiones).
+  // Cada marca nombra distinto el resultado de la cuenta (Aquarius dice conversaciones).
   const VOCAB = { conv: 'conversiones', conv1: 'conversión', convCap: 'Conversiones' };
   const MESES = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio',
     'Agosto', 'Setiembre', 'Octubre', 'Noviembre', 'Diciembre'];
