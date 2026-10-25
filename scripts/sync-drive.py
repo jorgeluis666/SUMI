@@ -395,6 +395,15 @@ def parse_campaign_report(text, name):
         if entry.get("campaign"):
             add_budget(budgets, entry, row, budget_columns, comma)
             records.append(entry)
+    if not totals and records:
+        # API reports contain campaign rows without Google's optional Total row.
+        # Recompute instead of retaining stale totals from a previous import.
+        def total(field):
+            values = [record.get(field) for record in records]
+            return None if any(value is None for value in values) else round(sum(values), 2)
+        totals = {field: total(field) for field in ("cost", "impressions", "clicks", "conversions")}
+        totals["ctr"] = totals["clicks"] / totals["impressions"] if totals["impressions"] else None
+        totals["costPerConversion"] = round(totals["cost"] / totals["conversions"], 2) if totals["conversions"] else None
     summary = {"period": period, "dailyBudget": round(sum(budgets.values()), 2) if budgets else None}
     return month_id, records, totals, summary
 
