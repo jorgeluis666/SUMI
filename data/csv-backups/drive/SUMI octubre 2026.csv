@@ -1,7 +1,4 @@
 Informe de campaña,,,,,,,,,,,,,,,,,,
-1 de octubre de 2026 - 4 de octubre de 2026,,,,,,,,,,,,,,,,,,
+1 de octubre de 2026 - 24 de octubre de 2026,,,,,,,,,,,,,,,,,,
 Estado de la campaña,Campaña,Presupuesto,Nombre del presupuesto,Tipo de presupuesto,Código de moneda,Estado,Motivos del estado,Tipo de campaña,Costo,Impr.,CTR,Valor de conv.,Clics,Costo/conv.,Conversiones,% impr. perdidas parte sup. búsqueda (clasificación),% impr. perdidas de la Búsqueda (presupuesto),Nivel de optimización
-Habilitada,Landing Page 001,25.00,--,Diariamente,PEN,Apta (limitada),limitado por el presupuesto,Búsqueda,108.35,"1,46",7.19%,56.50,105,1.92,56.50,30.19%,65.67%,96.29
-Total: Campañas,--,--,--,--,PEN,--,,--,108.35,"1,46",7.19%,56.50,105,1.92,56.50,30.19%,65.67%,--
-Total: Cuenta,,,,,PEN,,,,108.35,"1,46",7.19%,56.50,105,1.92,56.50,30.19%,65.67%,
-Total: Búsqueda,,,,,PEN,,,Búsqueda,108.35,"1,46",7.19%,56.50,105,1.92,56.50,30.19%,65.67%,
+Habilitada,Landing Page 001,"25,00",Landing Page 001,Diariamente,PEN,Limitado,"BUDGET_CONSTRAINED, UNKNOWN",Búsqueda,"624,00",10386,"6,40%","354,50",665,"1,76","354,50","40,46%","54,79%","95,31%"
