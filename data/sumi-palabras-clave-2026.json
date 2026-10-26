@@ -328,7 +328,7 @@
       "sourceFile": "SUMI KW octubre 2026",
       "period": {
         "start": "2026-10-01",
-        "end": "2026-10-25"
+        "end": "2026-10-26"
       },
       "keywords": [
         {
@@ -402,7 +402,7 @@
           "adGroup": "Palabras Clave Generales",
           "status": "Apto",
           "clicks": 70,
-          "impressions": 1052,
+          "impressions": 1067,
           "cost": 61.81,
           "conversions": 35
         },
@@ -425,10 +425,10 @@
           "campaign": "Landing Page 001",
           "adGroup": "Palabras Clave Generales",
           "status": "Apto",
-          "clicks": 505,
-          "impressions": 7947,
-          "cost": 481.85,
-          "conversions": 281.5
+          "clicks": 514,
+          "impressions": 8056,
+          "cost": 490.33,
+          "conversions": 287.5
         },
         {
           "state": "Habilitado",
@@ -450,7 +450,7 @@
           "adGroup": "Palabras Clave Generales",
           "status": "Apto",
           "clicks": 32,
-          "impressions": 430,
+          "impressions": 436,
           "cost": 27.24,
           "conversions": 8
         },
@@ -511,7 +511,7 @@
           "adGroup": "Palabras Clave Generales",
           "status": "Apto",
           "clicks": 22,
-          "impressions": 343,
+          "impressions": 351,
           "cost": 20.43,
           "conversions": 9
         },
@@ -584,7 +584,7 @@
           "adGroup": "Palabras Clave Generales",
           "status": "Apto",
           "clicks": 3,
-          "impressions": 41,
+          "impressions": 42,
           "cost": 2.44,
           "conversions": 2
         },
@@ -596,7 +596,7 @@
           "adGroup": "Palabras Clave Generales",
           "status": "Apto",
           "clicks": 36,
-          "impressions": 510,
+          "impressions": 511,
           "cost": 32.89,
           "conversions": 19
         },
@@ -643,12 +643,12 @@
   "drive": {
     "folderId": "1VdlVGjWTRItfPHM2TI1mr0RYja5fDPEX",
     "discovery": "apps script",
-    "lastSync": "2026-10-25T23:28:46Z",
+    "lastSync": "2026-10-26T11:33:41Z",
     "files": [
       {
         "id": "1EHHpfedobsXDOR-qdtlGad3lKOQK5J8pUXLaFBl6ilA",
         "name": "SUMI KW octubre 2026",
-        "modifiedTime": "2026-10-25T23:01:41.288Z"
+        "modifiedTime": "2026-10-26T11:01:45.349Z"
       },
       {
         "id": "1lr4ve1hWvpZ-LbOj8wsjOOGZv9MY39HPZZ-e4ysrFok",
