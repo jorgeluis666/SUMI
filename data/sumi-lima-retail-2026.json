@@ -52,35 +52,35 @@
         {
           "campaign": "Landing Page 001",
           "type": "Búsqueda",
-          "cost": 698.22,
-          "impressions": 11694,
-          "ctr": 0.064,
-          "clicks": 749,
+          "cost": 707.85,
+          "impressions": 11816,
+          "ctr": 0.0642,
+          "clicks": 759,
           "costPerConversion": 1.77,
-          "conversions": 394.5,
+          "conversions": 400.5,
           "status": "Habilitada",
           "dailyBudget": 25,
-          "costDelta": -0.03737609088277061,
-          "ctrDelta": -0.13161465400271366,
-          "clicksDelta": -0.12602100350058343,
-          "conversionsDelta": -0.11048478015783536,
+          "costDelta": -0.02409937545668872,
+          "ctrDelta": -0.12890094979647226,
+          "clicksDelta": -0.1143523920653442,
+          "conversionsDelta": -0.09695603156707999,
           "costPerConversionDelta": 0.0792682926829269,
-          "impressionsDelta": 0.004984530766586559
+          "impressionsDelta": 0.015469233413544226
         }
       ],
       "sourceFile": "SUMI octubre 2026",
       "driveFileId": "1ONpAvTXTGvwq5mYQHUW-DthAJQRpToRVIZKnK-MFn6E",
       "totals": {
-        "cost": 698.22,
-        "impressions": 11694,
-        "clicks": 749,
-        "conversions": 394.5,
-        "ctr": 0.06404994014024286,
+        "cost": 707.85,
+        "impressions": 11816,
+        "clicks": 759,
+        "conversions": 400.5,
+        "ctr": 0.06423493568043331,
         "costPerConversion": 1.77
       },
       "period": {
         "start": "2026-10-01",
-        "end": "2026-10-27"
+        "end": "2026-10-28"
       },
       "dailyBudget": 25
     }
@@ -92,31 +92,31 @@
     {
       "campaign": "Landing Page 001",
       "type": "Búsqueda",
-      "cost": 698.22,
-      "impressions": 11694,
-      "ctr": 0.064,
-      "clicks": 749,
+      "cost": 707.85,
+      "impressions": 11816,
+      "ctr": 0.0642,
+      "clicks": 759,
       "costPerConversion": 1.77,
-      "conversions": 394.5,
+      "conversions": 400.5,
       "status": "Habilitada",
       "dailyBudget": 25,
-      "costDelta": -0.03737609088277061,
-      "ctrDelta": -0.13161465400271366,
-      "clicksDelta": -0.12602100350058343,
-      "conversionsDelta": -0.11048478015783536,
+      "costDelta": -0.02409937545668872,
+      "ctrDelta": -0.12890094979647226,
+      "clicksDelta": -0.1143523920653442,
+      "conversionsDelta": -0.09695603156707999,
       "costPerConversionDelta": 0.0792682926829269,
-      "impressionsDelta": 0.004984530766586559
+      "impressionsDelta": 0.015469233413544226
     }
   ],
   "drive": {
     "folderId": "1Bmrx9yRMJCu8l4SCqvBOf0GdPWEMvvL6",
     "discovery": "apps script",
-    "lastSync": "2026-10-27T23:28:44Z",
+    "lastSync": "2026-10-28T11:33:38Z",
     "files": [
       {
         "id": "1ONpAvTXTGvwq5mYQHUW-DthAJQRpToRVIZKnK-MFn6E",
         "name": "SUMI octubre 2026",
-        "modifiedTime": "2026-10-27T23:01:59.590Z"
+        "modifiedTime": "2026-10-28T11:01:57.429Z"
       },
       {
         "id": "1yT4b6KNxgU7pGMgOTexnz5wbvpId5-9j5oRRJIeLgQk",
