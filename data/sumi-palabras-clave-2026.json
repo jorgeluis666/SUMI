@@ -402,7 +402,7 @@
           "adGroup": "Palabras Clave Generales",
           "status": "Apto",
           "clicks": 83,
-          "impressions": 1198,
+          "impressions": 1203,
           "cost": 72.85,
           "conversions": 40
         },
@@ -425,10 +425,10 @@
           "campaign": "Landing Page 001",
           "adGroup": "Palabras Clave Generales",
           "status": "Apto",
-          "clicks": 562,
-          "impressions": 9003,
-          "cost": 536.26,
-          "conversions": 310.5
+          "clicks": 566,
+          "impressions": 9062,
+          "cost": 540.05,
+          "conversions": 312.5
         },
         {
           "state": "Habilitado",
@@ -438,7 +438,7 @@
           "adGroup": "Palabras Clave Generales",
           "status": "Apto",
           "clicks": 4,
-          "impressions": 78,
+          "impressions": 79,
           "cost": 2.5,
           "conversions": 2
         },
@@ -450,7 +450,7 @@
           "adGroup": "Palabras Clave Generales",
           "status": "Apto",
           "clicks": 37,
-          "impressions": 529,
+          "impressions": 534,
           "cost": 31.72,
           "conversions": 11
         },
@@ -488,7 +488,7 @@
           "status": "UNKNOWN",
           "reasons": "AD_GROUP_CRITERION_LOW_QUALITY",
           "clicks": 12,
-          "impressions": 173,
+          "impressions": 175,
           "cost": 11.34,
           "conversions": 6
         },
@@ -512,7 +512,7 @@
           "adGroup": "Palabras Clave Generales",
           "status": "Apto",
           "clicks": 28,
-          "impressions": 400,
+          "impressions": 402,
           "cost": 25.81,
           "conversions": 9
         },
@@ -597,7 +597,7 @@
           "adGroup": "Palabras Clave Generales",
           "status": "Apto",
           "clicks": 38,
-          "impressions": 557,
+          "impressions": 565,
           "cost": 34.99,
           "conversions": 21
         },
@@ -644,12 +644,12 @@
   "drive": {
     "folderId": "1VdlVGjWTRItfPHM2TI1mr0RYja5fDPEX",
     "discovery": "apps script",
-    "lastSync": "2026-10-29T18:23:24Z",
+    "lastSync": "2026-10-29T23:28:46Z",
     "files": [
       {
         "id": "1EHHpfedobsXDOR-qdtlGad3lKOQK5J8pUXLaFBl6ilA",
         "name": "SUMI KW octubre 2026",
-        "modifiedTime": "2026-10-29T18:02:36.206Z"
+        "modifiedTime": "2026-10-29T23:02:27.491Z"
       },
       {
         "id": "1lr4ve1hWvpZ-LbOj8wsjOOGZv9MY39HPZZ-e4ysrFok",
