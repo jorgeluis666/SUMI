@@ -401,10 +401,10 @@
           "campaign": "Landing Page 001",
           "adGroup": "Palabras Clave Generales",
           "status": "Apto",
-          "clicks": 81,
-          "impressions": 1186,
-          "cost": 70.93,
-          "conversions": 39
+          "clicks": 83,
+          "impressions": 1198,
+          "cost": 72.85,
+          "conversions": 40
         },
         {
           "state": "Habilitado",
@@ -425,9 +425,9 @@
           "campaign": "Landing Page 001",
           "adGroup": "Palabras Clave Generales",
           "status": "Apto",
-          "clicks": 561,
-          "impressions": 8952,
-          "cost": 535.33,
+          "clicks": 562,
+          "impressions": 9003,
+          "cost": 536.26,
           "conversions": 310.5
         },
         {
@@ -450,7 +450,7 @@
           "adGroup": "Palabras Clave Generales",
           "status": "Apto",
           "clicks": 37,
-          "impressions": 527,
+          "impressions": 529,
           "cost": 31.72,
           "conversions": 11
         },
@@ -487,9 +487,9 @@
           "adGroup": "Palabras Clave Generales",
           "status": "UNKNOWN",
           "reasons": "AD_GROUP_CRITERION_LOW_QUALITY",
-          "clicks": 11,
-          "impressions": 167,
-          "cost": 10.39,
+          "clicks": 12,
+          "impressions": 173,
+          "cost": 11.34,
           "conversions": 6
         },
         {
@@ -512,7 +512,7 @@
           "adGroup": "Palabras Clave Generales",
           "status": "Apto",
           "clicks": 28,
-          "impressions": 399,
+          "impressions": 400,
           "cost": 25.81,
           "conversions": 9
         },
@@ -549,7 +549,7 @@
           "adGroup": "Palabras Clave Generales",
           "status": "Apto",
           "clicks": 2,
-          "impressions": 34,
+          "impressions": 35,
           "cost": 1.77,
           "conversions": 1
         },
@@ -597,7 +597,7 @@
           "adGroup": "Palabras Clave Generales",
           "status": "Apto",
           "clicks": 38,
-          "impressions": 556,
+          "impressions": 557,
           "cost": 34.99,
           "conversions": 21
         },
@@ -644,12 +644,12 @@
   "drive": {
     "folderId": "1VdlVGjWTRItfPHM2TI1mr0RYja5fDPEX",
     "discovery": "apps script",
-    "lastSync": "2026-10-29T11:33:43Z",
+    "lastSync": "2026-10-29T18:23:24Z",
     "files": [
       {
         "id": "1EHHpfedobsXDOR-qdtlGad3lKOQK5J8pUXLaFBl6ilA",
         "name": "SUMI KW octubre 2026",
-        "modifiedTime": "2026-10-29T11:02:08.404Z"
+        "modifiedTime": "2026-10-29T18:02:36.206Z"
       },
       {
         "id": "1lr4ve1hWvpZ-LbOj8wsjOOGZv9MY39HPZZ-e4ysrFok",
