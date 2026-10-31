@@ -328,7 +328,7 @@
       "sourceFile": "SUMI KW octubre 2026",
       "period": {
         "start": "2026-10-01",
-        "end": "2026-10-30"
+        "end": "2026-10-31"
       },
       "keywords": [
         {
@@ -425,10 +425,10 @@
           "campaign": "Landing Page 001",
           "adGroup": "Palabras Clave Generales",
           "status": "Apto",
-          "clicks": 92,
-          "impressions": 1280,
-          "cost": 80.09,
-          "conversions": 43
+          "clicks": 94,
+          "impressions": 1289,
+          "cost": 81.95,
+          "conversions": 44
         },
         {
           "state": "Habilitado",
@@ -450,7 +450,7 @@
           "adGroup": "Palabras Clave Generales",
           "status": "Apto",
           "clicks": 0,
-          "impressions": 0,
+          "impressions": 1,
           "cost": 0,
           "conversions": 0
         },
@@ -461,10 +461,10 @@
           "campaign": "Landing Page 001",
           "adGroup": "Palabras Clave Generales",
           "status": "Apto",
-          "clicks": 596,
-          "impressions": 9649,
-          "cost": 567.76,
-          "conversions": 328.5
+          "clicks": 602,
+          "impressions": 9742,
+          "cost": 573.12,
+          "conversions": 331.5
         },
         {
           "state": "Habilitado",
@@ -474,7 +474,7 @@
           "adGroup": "Palabras Clave Generales",
           "status": "Apto",
           "clicks": 4,
-          "impressions": 86,
+          "impressions": 89,
           "cost": 2.5,
           "conversions": 2
         },
@@ -486,9 +486,9 @@
           "adGroup": "Palabras Clave Generales",
           "status": "Apto",
           "clicks": 41,
-          "impressions": 594,
+          "impressions": 599,
           "cost": 35.58,
-          "conversions": 12
+          "conversions": 13
         },
         {
           "state": "Habilitado",
@@ -524,7 +524,7 @@
           "status": "UNKNOWN",
           "reasons": "AD_GROUP_CRITERION_LOW_QUALITY",
           "clicks": 13,
-          "impressions": 190,
+          "impressions": 193,
           "cost": 12.15,
           "conversions": 6
         },
@@ -547,9 +547,9 @@
           "campaign": "Landing Page 001",
           "adGroup": "Palabras Clave Generales",
           "status": "Apto",
-          "clicks": 30,
-          "impressions": 418,
-          "cost": 27.85,
+          "clicks": 31,
+          "impressions": 420,
+          "cost": 28.59,
           "conversions": 10
         },
         {
@@ -645,7 +645,7 @@
           "adGroup": "Palabras Clave Generales",
           "status": "Apto",
           "clicks": 40,
-          "impressions": 595,
+          "impressions": 598,
           "cost": 36.99,
           "conversions": 23
         },
@@ -716,12 +716,12 @@
   "drive": {
     "folderId": "1VdlVGjWTRItfPHM2TI1mr0RYja5fDPEX",
     "discovery": "apps script",
-    "lastSync": "2026-10-30T23:28:46Z",
+    "lastSync": "2026-10-31T11:33:43Z",
     "files": [
       {
         "id": "1EHHpfedobsXDOR-qdtlGad3lKOQK5J8pUXLaFBl6ilA",
         "name": "SUMI KW octubre 2026",
-        "modifiedTime": "2026-10-30T23:02:32.140Z"
+        "modifiedTime": "2026-10-31T11:02:16.239Z"
       },
       {
         "id": "1lr4ve1hWvpZ-LbOj8wsjOOGZv9MY39HPZZ-e4ysrFok",
