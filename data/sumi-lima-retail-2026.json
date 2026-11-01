@@ -4,7 +4,7 @@
   "moduleSubtitle": "Leads en Google Ads",
   "schemaVersion": 3,
   "status": "ok",
-  "defaultMonth": "2026-10",
+  "defaultMonth": "2026-11",
   "months": [
     {
       "id": "2026-09",
@@ -52,17 +52,17 @@
         {
           "campaign": "Landing Page 001",
           "type": "Búsqueda",
-          "cost": 800.17,
+          "cost": 800.94,
           "impressions": 13517,
           "ctr": 0.0638,
-          "clicks": 862,
+          "clicks": 863,
           "costPerConversion": 1.78,
           "conversions": 450.5,
           "status": "En pausa",
           "dailyBudget": 26,
-          "costDelta": 0.10318062123447236,
+          "costDelta": 0.10424220699543651,
           "ctrDelta": -0.13432835820895528,
-          "clicksDelta": 0.005834305717619559,
+          "clicksDelta": 0.007001166861143604,
           "conversionsDelta": 0.015783540022547893,
           "costPerConversionDelta": 0.08536585365853666,
           "impressionsDelta": 0.16165348917153666
@@ -71,51 +71,94 @@
       "sourceFile": "SUMI octubre 2026",
       "driveFileId": "1ONpAvTXTGvwq5mYQHUW-DthAJQRpToRVIZKnK-MFn6E",
       "totals": {
-        "cost": 800.17,
+        "cost": 800.94,
         "impressions": 13517,
-        "clicks": 862,
+        "clicks": 863,
         "conversions": 450.5,
-        "ctr": 0.06377154694088925,
+        "ctr": 0.06384552785381371,
         "costPerConversion": 1.78
       },
       "period": {
         "start": "2026-10-01",
         "end": "2026-10-31"
       }
+    },
+    {
+      "id": "2026-11",
+      "label": "Noviembre 2026",
+      "records": [
+        {
+          "campaign": "Landing Page 001",
+          "type": "Búsqueda",
+          "cost": 0,
+          "impressions": 0,
+          "ctr": 0.0,
+          "clicks": 0,
+          "costPerConversion": 0,
+          "conversions": 0,
+          "status": "En pausa",
+          "dailyBudget": 26,
+          "costDelta": -1.0,
+          "ctrDelta": -1.0,
+          "clicksDelta": -1.0,
+          "conversionsDelta": -1.0,
+          "costPerConversionDelta": -1.0,
+          "impressionsDelta": -1.0
+        }
+      ],
+      "sourceFile": "SUMI noviembre 2026",
+      "driveFileId": "1sNMakLnUIqJDE6LBVqqx2rr04Z-E6KUwSxbBxNy-1mE",
+      "totals": {
+        "cost": 0,
+        "impressions": 0,
+        "clicks": 0,
+        "conversions": 0,
+        "ctr": null,
+        "costPerConversion": null
+      },
+      "period": {
+        "start": "2026-11-01",
+        "end": "2026-11-01"
+      }
     }
   ],
-  "month": "2026-10",
-  "sourceFile": "SUMI octubre 2026",
+  "month": "2026-11",
+  "sourceFile": "SUMI noviembre 2026",
   "receivedHeaders": [],
   "records": [
     {
       "campaign": "Landing Page 001",
       "type": "Búsqueda",
-      "cost": 800.17,
-      "impressions": 13517,
-      "ctr": 0.0638,
-      "clicks": 862,
-      "costPerConversion": 1.78,
-      "conversions": 450.5,
+      "cost": 0,
+      "impressions": 0,
+      "ctr": 0.0,
+      "clicks": 0,
+      "costPerConversion": 0,
+      "conversions": 0,
       "status": "En pausa",
       "dailyBudget": 26,
-      "costDelta": 0.10318062123447236,
-      "ctrDelta": -0.13432835820895528,
-      "clicksDelta": 0.005834305717619559,
-      "conversionsDelta": 0.015783540022547893,
-      "costPerConversionDelta": 0.08536585365853666,
-      "impressionsDelta": 0.16165348917153666
+      "costDelta": -1.0,
+      "ctrDelta": -1.0,
+      "clicksDelta": -1.0,
+      "conversionsDelta": -1.0,
+      "costPerConversionDelta": -1.0,
+      "impressionsDelta": -1.0
     }
   ],
   "drive": {
     "folderId": "1Bmrx9yRMJCu8l4SCqvBOf0GdPWEMvvL6",
     "discovery": "apps script",
-    "lastSync": "2026-10-31T23:28:44Z",
+    "lastSync": "2026-11-01T11:33:38Z",
     "files": [
+      {
+        "id": "1sNMakLnUIqJDE6LBVqqx2rr04Z-E6KUwSxbBxNy-1mE",
+        "name": "SUMI noviembre 2026",
+        "modifiedTime": "2026-11-01T11:04:44.065Z"
+      },
       {
         "id": "1ONpAvTXTGvwq5mYQHUW-DthAJQRpToRVIZKnK-MFn6E",
         "name": "SUMI octubre 2026",
-        "modifiedTime": "2026-10-31T23:02:20.562Z"
+        "modifiedTime": "2026-11-01T11:04:22.212Z"
       },
       {
         "id": "1yT4b6KNxgU7pGMgOTexnz5wbvpId5-9j5oRRJIeLgQk",
