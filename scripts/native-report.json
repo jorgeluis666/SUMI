@@ -1,0 +1,11 @@
+{
+  "kind": "sumi",
+  "data": "SumiGasto",
+  "module": "SumiReport",
+  "brand": "sumi",
+  "periodSource": "data/sumi-lima-retail-2026.json",
+  "snapshotFiles": [
+    "data/sumi-lima-retail-2026.json",
+    "data/sumi-palabras-clave-2026.json"
+  ]
+}
