@@ -472,7 +472,7 @@
           "clicks": 617,
           "impressions": 10018,
           "cost": 585.46,
-          "conversions": 340.5
+          "conversions": 341.5
         },
         {
           "state": "Habilitado",
@@ -1156,17 +1156,17 @@
   "drive": {
     "folderId": "1VdlVGjWTRItfPHM2TI1mr0RYja5fDPEX",
     "discovery": "apps script",
-    "lastSync": "2026-11-15T11:33:43Z",
+    "lastSync": "2026-11-15T23:28:50Z",
     "files": [
       {
         "id": "1p482FJxHXgFO8rNwaFKoUcFY8w10RgYHYKk1FCZY_DI",
         "name": "SUMI KW noviembre 2026",
-        "modifiedTime": "2026-11-15T11:04:16.955Z"
+        "modifiedTime": "2026-11-15T23:03:59.989Z"
       },
       {
         "id": "1EHHpfedobsXDOR-qdtlGad3lKOQK5J8pUXLaFBl6ilA",
         "name": "SUMI KW octubre 2026",
-        "modifiedTime": "2026-11-15T11:04:05.789Z"
+        "modifiedTime": "2026-11-15T23:03:48.812Z"
       },
       {
         "id": "1lr4ve1hWvpZ-LbOj8wsjOOGZv9MY39HPZZ-e4ysrFok",

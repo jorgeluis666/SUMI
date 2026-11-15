@@ -56,15 +56,15 @@
           "impressions": 13517,
           "ctr": 0.0638,
           "clicks": 863,
-          "costPerConversion": 1.78,
-          "conversions": 450.5,
+          "costPerConversion": 1.77,
+          "conversions": 451.5,
           "status": "En pausa",
           "dailyBudget": 26,
           "costDelta": 0.10424220699543651,
           "ctrDelta": -0.13432835820895528,
           "clicksDelta": 0.007001166861143604,
-          "conversionsDelta": 0.015783540022547893,
-          "costPerConversionDelta": 0.08536585365853666,
+          "conversionsDelta": 0.018038331454340417,
+          "costPerConversionDelta": 0.0792682926829269,
           "impressionsDelta": 0.16165348917153666
         }
       ],
@@ -74,9 +74,9 @@
         "cost": 800.94,
         "impressions": 13517,
         "clicks": 863,
-        "conversions": 450.5,
+        "conversions": 451.5,
         "ctr": 0.06384552785381371,
-        "costPerConversion": 1.78
+        "costPerConversion": 1.77
       },
       "period": {
         "start": "2026-10-01",
@@ -148,17 +148,17 @@
   "drive": {
     "folderId": "1Bmrx9yRMJCu8l4SCqvBOf0GdPWEMvvL6",
     "discovery": "apps script",
-    "lastSync": "2026-11-15T11:33:39Z",
+    "lastSync": "2026-11-15T23:28:45Z",
     "files": [
       {
         "id": "1sNMakLnUIqJDE6LBVqqx2rr04Z-E6KUwSxbBxNy-1mE",
         "name": "SUMI noviembre 2026",
-        "modifiedTime": "2026-11-15T11:03:54.626Z"
+        "modifiedTime": "2026-11-15T23:03:37.592Z"
       },
       {
         "id": "1ONpAvTXTGvwq5mYQHUW-DthAJQRpToRVIZKnK-MFn6E",
         "name": "SUMI octubre 2026",
-        "modifiedTime": "2026-11-15T11:03:43.530Z"
+        "modifiedTime": "2026-11-15T23:03:26.385Z"
       },
       {
         "id": "1yT4b6KNxgU7pGMgOTexnz5wbvpId5-9j5oRRJIeLgQk",
