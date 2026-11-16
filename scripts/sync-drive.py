@@ -727,9 +727,14 @@ def main():
     before = comparable(document)
     months = {month["id"]: month for month in document["months"]}
     BACKUPS.mkdir(parents=True, exist_ok=True)
+    visibility_changed = False
 
     for item in sorted(reports, key=lambda entry: entry["name"]):
         text = download(item["id"], item["name"])
+        backup_path = BACKUPS / backup_name(item["name"])
+        if "Nexus visibilidad" in text:
+            visibility_changed = visibility_changed or not backup_path.exists() or backup_path.read_text(encoding="utf-8") != text
+            backup_path.write_text(text, encoding="utf-8", newline="")
         month_id, records, totals, summary = parse_campaign_report(text, item["name"])
         if not month_id or not records:
             print(f"[sync-drive] omito {item['name']}: no parece un informe de campana.")
@@ -739,7 +744,7 @@ def main():
         print(f"[sync-drive] {month_label(month_id)}: {len(records)} campanas")
 
     finish_document(document, months)
-    changed = comparable(document) != before
+    changed = comparable(document) != before or visibility_changed
     document["drive"] = {
         "folderId": folder_id,
         "discovery": origin,
